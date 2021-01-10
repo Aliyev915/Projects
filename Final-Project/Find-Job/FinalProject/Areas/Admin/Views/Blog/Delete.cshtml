@@ -1,0 +1,40 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="right-side">
+    <h4>Post a Job</h4>
+    <div class="post">
+        <div class="title">
+            <h4>Basic Information</h4>
+        </div>
+        <div class="form">
+            <form method="post">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Job Title</label> <br>
+                        <input asp-for="Title" disabled class="input-text" value="@Model.Title" placeholder="Your Title">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="image">
+                            <img src="~/img/blog/@Model.Image" alt="" />
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <label for="">Job Description</label>
+                        <textarea asp-for="Description" rows="8" disabled placeholder="Detailed Information">
+                            @Model.Description
+                        </textarea>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <button class="btn btn-danger">Delete</button>
+                        <a asp-area="Admin" asp-controller="Job" asp-action="Index" class="btn btn-light">Go Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>© 2018 Theme Vessel. Trademarks and brands are the property of their respective owners.</p>
+    </div>
+</div>

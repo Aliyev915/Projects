@@ -1,0 +1,165 @@
+﻿@model CreateTeacherVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4 class="card-title">Create</h4>
+<form class="forms-sample" method="post" id="form" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="Name">Name</label>
+                        <input rows="5" class="form-control exampleInputEmail3" asp-for="Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Profession">Profession</label>
+                        <input class="form-control exampleInputName1" asp-for="Profession">
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Communication">Communication</label>
+                                <div class="input-group">
+                                    <input class="form-control" asp-for="Communication" id="category" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Design">Design</label>
+                                <div class="input-group">
+                                    <input class="form-control" asp-for="Design" id="category" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Development">Development</label>
+                                <div class="input-group">
+                                    <input class="form-control" asp-for="Development" id="category" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Innovation">Innovation</label>
+                                <div class="input-group">
+                                    <input class="form-control" asp-for="Innovation" id="category" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Language">Language</label>
+                                <div class="input-group">
+                                    <input class="form-control" asp-for="Language" id="category" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="TeamLeader">Team Leader</label>
+                                <div class="input-group">
+                                    <input class="form-control" asp-for="TeamLeader" id="category" />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Degree">Degree</label>
+                        <input class="form-control exampleInputName1" asp-for="Degree">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email">Email</label>
+                        <input class="form-control exampleInputName1" asp-for="Email">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Experience">Experience</label>
+                        <input class="form-control exampleInputName1" asp-for="Experience">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="Faculty">Faculty</label>
+                        <input class="form-control exampleInputName1" asp-for="Faculty">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Hobby">Hobby</label>
+                        <input class="form-control exampleInputName1" asp-for="Hobby">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Phone">Phone</label>
+                        <input class="form-control exampleInputName1" asp-for="Phone">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Skype">Skype</label>
+                        <input class="form-control exampleInputName1" asp-for="Skype">
+                    </div>
+                    <div class="form-group">
+                        <label>File upload</label>
+                        <input value="" class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                            <input value="" asp-for="Photo" class="form-control file-upload-info" id="upload" accept="image/*" placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-info" type="button" id="btn-upload">Upload</button>
+                            </span>
+                        </div>
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                    </div>
+                    <input type="submit" class="btn btn-success mr-2" value="Create">
+                    <button class="btn btn-light">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        let button = document.querySelector('#btn-upload');
+        button.onclick = function () {
+            $('#upload').click();
+        }
+        $(document).ready(function () {
+            $('#form').submit(function (e) {
+                e.preventDefault();
+                if ($('#upload').val() == '') {
+                    swal({
+                        title: 'Please, select at least one file!',
+                        icon: 'warning'
+                    });
+                } else {
+                    swal({
+                        title: "Are you sure to upload this files?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                swal("Your files has been uploaded!", {
+                                    icon: "success",
+                                });
+                                setTimeout(() => { document.querySelector('#form').submit() }, 2000);
+                            }
+                        });
+                }
+            })
+        })
+    </script>
+}

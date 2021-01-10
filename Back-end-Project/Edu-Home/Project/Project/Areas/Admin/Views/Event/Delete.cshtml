@@ -1,0 +1,59 @@
+﻿@model Event
+@using System.Text.RegularExpressions;
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-5 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Course</h4>
+                <form class="forms-sample" method="post" id="form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Title</label>
+                        <input class="form-control exampleInputName1" value="@Regex.Replace(Model.Name, @"<[^>]*>", "")" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Description</label>
+                        <textarea rows="5" class="form-control exampleInputEmail3">@Regex.Replace(Model.About, @"<[^>]*>", "")</textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="image">
+                            <img src="~/img/event/@Model.Image" alt="Image" width="300" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-danger mr-2">Delete</button>
+                    <a class="btn btn-light" asp-controller="Dashboard" asp-action="Index">Go Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#form').submit(function (e) {
+                e.preventDefault();
+                    swal({
+                        title: "Are you sure to delete this event?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                swal("Your event has been deleted!", {
+                                    icon: "success",
+                                });
+                                setTimeout(() => { document.querySelector('#form').submit() }, 1000);
+                            }
+                        });
+            })
+        })
+    </script>
+
+
+}

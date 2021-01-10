@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Message>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="right-side">
+    <h4>Messages</h4>
+    <div class="message-list">
+        <div class="title">
+            <h4>Messages</h4>
+        </div>
+        @foreach (Message item in Model)
+        {
+            <input type="hidden" id="Id" value="@item.Id"/>
+            <div class="message">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="image">
+                            @if (item.AppUser.Image != null)
+                            {
+                                <img src="~/img/@item.AppUser.Image" alt="">
+                            }
+                            else
+                            {
+                                <img src="~/img/user.png" alt="">
+                            }
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="username">
+                            <h4>@item.AppUser.Fullname</h4>
+                        </div>
+                        <div class="message-date">
+                            <span>@item.Time.ToString("h:mm tt dd/MM/yyyy")</span>
+                        </div>
+                        <div class="message-text">
+                            @if (item.IsRead)
+                            {
+                                if (ViewBag.Role != "Moderator")
+                                {
+                                    <p>
+                                        @item.Text
+                                    </p>
+                                }
+                                else
+                                {
+                                    Candidate candidate = ViewBag.Candidate;
+                                    <p>
+                                        <a asp-area="" asp-controller="Candidate" asp-action="Detail" asp-route-name="@item.Text">@item.Text</a>
+                                    </p>
+                                }
+                            }
+                            else
+                            {
+                                <p style="color:#222; font-weight:bold;">
+                                    @item.Text
+                                </p>
+                            }
+                        </div>
+                        <div class="reply">
+                            <a asp-controller="Message" asp-action="Reply" asp-route-Id="@item.Id">
+                                <i class="fas fa-reply"></i>
+                            </a>
+                            <a asp-controller="Message" asp-action="DeleteMessage" asp-route-Id="@item.Id">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                        @if (item.IsRead == false)
+                        {
+                            <div class="mark-as-read">
+                                <i class="fas fa-envelope-open"></i>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="mark-as-read">
+                                <i class="far fa-envelope-open"></i>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="kebab-menu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="menu-item">
+            @if ((Model.Where(m => m.IsRead == true)).Count() > 0)
+            {
+                <span>Mark as Unread All</span>
+            }
+            else
+            {
+                <span>Mark as Read All</span>
+            }
+        </div>
+    </div>
+    <div class="copyright">
+        <p>© 2018 Theme Vessel. Trademarks and brands are the property of their respective owners.</p>
+    </div>
+</div>

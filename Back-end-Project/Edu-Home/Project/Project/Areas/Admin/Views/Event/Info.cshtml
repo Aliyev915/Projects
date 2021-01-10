@@ -1,0 +1,71 @@
+﻿@model Event
+@{
+    ViewData["Title"] = "Info";
+}
+
+
+<h4 class="card-title">Info</h4>
+<form class="forms-sample" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Title</label>
+                        <input rows="5" class="form-control exampleInputEmail3" value="@Model.Name" />
+                        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label value="@Model.About">About</label>
+                        <input class="form-control exampleInputName1" value="@Model.About">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Category">Category:  </label>
+                        <div class="input-group">
+                            <input class="form-control" disabled value="@Model.Category.CategoryName" id="category" />
+                            <i class="fas fa-caret-down ml-2"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Place</label>
+                        <input rows="5" class="form-control exampleInputEmail3" disabled value="@Model.Place" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <h3>Image</h3>
+                        <img src="~/img/event/@Model.Image" alt="Alternate Text" />
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="exampleInputName1">Event Starts:</label>
+                            <input class="form-control exampleInputName1" value="@Model.StartTime">
+                        </div>
+                        <div class="row">
+                            <label for="exampleInputName1">Event Ends:</label>
+                            <input class="form-control exampleInputName1" value="@Model.EndTime">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Speakers</label>
+                        @foreach (EventSpeaker item in ViewBag.Speakers)
+                        {
+                            <div class="row">
+                                <img src="~/img/event/@item.Speaker.Image" alt="Alternate Text" />
+                                <p>@item.Speaker.Fullname</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+

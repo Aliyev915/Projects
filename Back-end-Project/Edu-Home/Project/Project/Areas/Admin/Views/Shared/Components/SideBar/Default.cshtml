@@ -1,0 +1,97 @@
+﻿@model AppUser
+@{
+    Layout = null;
+}
+
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+            <li class="nav-item nav-profile">
+                <div class="text-wrapper" style="color:white; font-size:16px; text-align:center">
+                    @Model.Fullname
+                </div>
+                <a asp-area="" asp-controller="Home" class="nav-link">
+                    <div class="profile-image">
+                        <img class="img-xs rounded-circle" src="~/Admin/images/faces/face8.jpg" alt="profile image">
+                        <div class="dot-indicator bg-success"></div>
+                    </div>
+                    <div class="text-wrapper">
+                        Back To Home
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item nav-category">Main Menu</li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Dashboard">
+                    <i class="menu-icon typcn typcn-document-text"></i>
+                    <span class="menu-title">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon typcn typcn-coffee"></i>
+                    <span class="menu-title">Sliders</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Slider" asp-action="Index">Images</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Slider" asp-action="Content">Slider Content</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Content" asp-action="Index">
+                    <i class="menu-icon typcn typcn-shopping-bag"></i>
+                    <span class="menu-title">Content</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Admin" asp-controller="Course" asp-action="Index">
+                    <i class="menu-icon typcn typcn-th-large-outline"></i>
+                    <span class="menu-title">Courses</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Admin" asp-controller="Event" asp-action="Index">
+                    <i class="menu-icon typcn typcn-bell"></i>
+                    <span class="menu-title">Events</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Admin" asp-controller="Blog" asp-action="Index">
+                    <i class="menu-icon typcn typcn-user-outline"></i>
+                    <span class="menu-title">Blogs</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Admin" asp-controller="Teacher" asp-action="Index">
+                    <i class="menu-icon typcn typcn-user-outline"></i>
+                    <span class="menu-title">Teachers</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                    <i class="menu-icon typcn typcn-document-add"></i>
+                    <span class="menu-title">User Pages</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="auth">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="AllUsers">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="AllUsers" asp-action="Create"> Register </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="AllUsers" asp-action="DeletedUser"> Deleted Users </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>

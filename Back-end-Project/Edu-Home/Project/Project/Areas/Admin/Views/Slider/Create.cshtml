@@ -1,0 +1,65 @@
+﻿@model Slider
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-5 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Create Image</h4>
+                <form class="forms-sample" id="form" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>File upload</label>
+                        <input class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                            <input asp-for="Photos" class="form-control file-upload-info" id="upload" accept="image/*" multiple placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-info" id="btn-upload" type="button">Upload</button>
+                            </span>
+                        </div>
+                        <span asp-validation-for="Photos" class="text-danger"></span>
+                    </div>
+                    <input type="submit" class="btn btn-success mr-2" value="Create">
+                    <a asp-action="Index" class="btn btn-light">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <script>
+        let button = document.querySelector('#btn-upload');
+        button.onclick = function () {
+            $('#upload').click();
+        }
+        $(document).ready(function () {
+            $('#form').submit(function (e) {
+                e.preventDefault();
+                if ($('#upload').val() == '') {
+                    swal({
+                        title: 'Please, select at least one file!',
+                        icon: 'warning'
+                    });
+                } else {
+                    swal({
+                        title: "Are you sure to upload this files?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                swal("Your files has been uploaded!", {
+                                    icon: "success",
+                                });
+                                setTimeout(() => { document.querySelector('#form').submit() }, 2000);
+                            }
+                        });
+                }
+            })
+        })
+    </script>
+}

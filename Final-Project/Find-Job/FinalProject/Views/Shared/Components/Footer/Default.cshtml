@@ -1,0 +1,131 @@
+﻿@model Bio
+@{
+    Layout = null;
+}
+<!-- back to top -->
+<div class="back-to-top">
+    <i class="fas fa-chevron-up"></i>
+</div>
+<!-- back to top -->
+<!-- footer start -->
+<footer>
+    <div class="container">
+        <div class="footer-menu row">
+            <div class="col-lg-3 col-md-4 col-sm-6 mt-3">
+                <div class="logo">
+                    <img src="~/img/logo/logo.png" alt="logo">
+                </div>
+                <div class="adress">
+                    <i class="fas fa-map-marker-alt"></i> @Model.Address
+                </div>
+                <div class="envelope">
+                    <i class="far fa-envelope"></i> @Model.Email
+                </div>
+                <div class="phone">
+                    <i class="fas fa-phone-alt"></i> @Model.Phone
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
+                <h3>Helpful Links</h3>
+                <ul>
+                    <li>
+                        <a asp-controller="About" asp-action="Index">About Us</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Contact" asp-action="Index">Contact Us</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Employer" asp-action="Index">Employers</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Job" asp-action="Index">Jobs</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Blog" asp-action="Index">Blog</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
+                <h3>Job Seekers</h3>
+                <ul>
+                    <li>
+                        <a href="~/">Create Account</a>
+                    </li>
+                    <li>
+                        <a href="~/">Career Counseling</a>
+                    </li>
+                    <li>
+                        <a href="~/">My Oficiona</a>
+                    </li>
+                    <li>
+                        <a href="~/">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
+                <h3>Employers</h3>
+                <ul>
+                    <li>
+                        <a href="~/">Create Account</a>
+                    </li>
+                    <li>
+                        <a href="~/">Products $ Service</a>
+                    </li>
+                    <li>
+                        <a href="~/">Post a Task</a>
+                    </li>
+                    <li>
+                        <a href="~/">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md mt-3 sendEmail">
+                <h3>Newsletter</h3>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.</p>
+                <input type="text" placeholder="Email Adress">
+                <button><i class="fas fa-location-arrow"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="link">
+                    <span>© 2019</span>
+                    <a href="~/">Theme Vessel.</a>
+                    <span>Trademarks and brands are the property of their respective owners.</span>
+                </div>
+                <div class="sosial">
+                    <ul>
+                        <li>
+                            <a href="~/">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/">
+                                <i class="fab fa-google-plus-g"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/">
+                                <i class="fas fa-rss"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- footer end -->

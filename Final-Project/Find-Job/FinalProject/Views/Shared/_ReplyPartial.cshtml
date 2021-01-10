@@ -1,0 +1,24 @@
+﻿@model BlogDetailVM
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+    <div class="leave-comment">
+        <div class="row">
+            <div class="col-1">
+                <div class="image">
+                    <img src="~/img/avatar/avatar-1.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="form-group">
+                    <textarea class="comment-input" asp-for="Message" placeholder="leave a comment"></textarea>
+                </div>
+            </div>
+            <div class="send">
+                <button class="btn-send" disabled>Comment</button>
+                <a href="" class="btn btn-send bg-light text-dark">Cancel</a>
+            </div>
+        </div>
+    </div>

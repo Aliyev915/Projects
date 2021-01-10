@@ -1,0 +1,107 @@
+﻿@model IEnumerable<AppUser>
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <div class="right-side">
+        <h4>User List</h4>
+        <div class="users">
+            <div class="user-nav">
+                <div class="time">
+                    <span class="actived" data-id="today">Active Users</span>
+                    <span data-id="month">Deleted Users</span>
+                </div>
+            </div>
+            <div class="userList" data-id="today">
+                <div class="manage">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Username</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Setting</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (AppUser item in Model.Where(user=>user.IsDeleted==false))
+                            {
+                                <tr>
+                                    <th scope="row">
+                                        <div class="job">
+                                            <div class="job-info">
+                                                <div class="name">
+                                                    <h4>@item.UserName</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td>@item.Email</td>
+                                    <td>
+                                        @{
+                                            UserManager<AppUser> manager = ViewBag.manager;
+                                        }
+                                        @((await manager.GetRolesAsync(item))[0])
+                                    </td>
+                                    <td>
+                                        <a asp-controller="User" asp-action="Edit" asp-route-username="@item.UserName">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-controller="User" asp-action="Delete" asp-route-username="@item.UserName">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="userList d-none" data-id="month">
+                <div class="manage">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Username</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Setting</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (AppUser item in Model.Where(user=>user.IsDeleted==true))
+                            {
+                                <tr>
+                                    <th scope="row">
+                                        <div class="job">
+                                            <div class="job-info">
+                                                <div class="name">
+                                                    <h4>@item.UserName</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td>@item.Email</td>
+                                    <td>
+                                        @{
+                                            UserManager<AppUser> manager = ViewBag.manager;
+                                        }
+                                        @((await manager.GetRolesAsync(item))[0])
+                                    </td>
+                                    <td>
+                                        <a asp-controller="User" asp-action="Delete" asp-route-username="@item.UserName">
+                                            <i class="fas fa-check"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2018 Theme Vessel. Trademarks and brands are the property of their respective owners.</p>
+        </div>
+    </div>

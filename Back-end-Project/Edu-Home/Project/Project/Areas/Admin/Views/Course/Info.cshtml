@@ -1,0 +1,86 @@
+﻿@model Course
+@using System.Text.RegularExpressions;
+@{
+    ViewData["Title"] = "Info";
+}
+
+<div class="row">
+    <a asp-action="Index" class="btn-dark">
+        <i class="fas fa-arrow-left" style="font-size:20px"></i>
+    </a>
+</div>
+<form class="forms-sample" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Title</label>
+                        <input disabled class="form-control exampleInputEmail3" value="@Regex.Replace(Model.Title, @"<[^>]*>", "")" />
+                        <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label value="@Model.Description">About</label>
+                        <input disabled class="form-control exampleInputName1" value='@Regex.Replace(Model.Description, @"<[^>]*>", "")'>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Category">Category</label>
+                        <div class="input-group">
+                            <input class="form-control" disabled value="@Model.Category.CategoryName" id="category" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>About</label>
+                        <input rows="5" class="form-control exampleInputEmail3" disabled value="@Regex.Replace(Model.CourseFeatures.About, @"<[^>]*>", "")" />
+                    </div>
+                    <div class="form-group">
+                        <label>Apply</label>
+                        <input class="form-control exampleInputEmail3" disabled value="@Regex.Replace(Model.CourseFeatures.Apply, @"<[^>]*>", "")" />
+                    </div>
+                    <div class="form-group">
+                        <label>Certificaton</label>
+                        <input rows="5" class="form-control exampleInputEmail3" disabled value="@Regex.Replace(Model.CourseFeatures.Certification, @"<[^>]*>", "")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <h3>Image</h3>
+                        <img src="~/img/course/@Model.Image" alt="Alternate Text" />
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="exampleInputName1">Class Duration</label>
+                                <input disabled class="form-control exampleInputName1" value="@Model.CourseFeatures.ClassDuration" />
+                            </div>
+                            <div class="col-6">
+                                <label for="exampleInputName1">Duratiom</label>
+                                <input class="form-control exampleInputName1" disabled value="@Model.CourseFeatures.Duration">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Fee</label>
+                        <input rows="5" class="form-control exampleInputEmail3" disabled value="@Model.CourseFeatures.Fee" />
+                    </div>
+                    <div class="form-group">
+                        <label>Skill Level</label>
+                        <input rows="5" class="form-control exampleInputEmail3" disabled value="@Model.CourseFeatures.SkillLevel" />
+                    </div>
+                    <div class="form-group">
+                        <label>Start Time</label>
+                        <input rows="5" class="form-control exampleInputEmail3" disabled value="@Model.CourseFeatures.StartTime" />
+                    </div>
+                    <div class="form-group">
+                        <label>Students</label>
+                        <input rows="5" class="form-control exampleInputEmail3" disabled value="@Model.CourseFeatures.Student" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

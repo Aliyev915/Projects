@@ -1,0 +1,81 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = "Edit";
+}
+
+    <div class="right-side">
+        <div class="basic-info">
+            <div class="title">
+                <h4>Add Blog</h4>
+            </div>
+            <div class="form">
+                <form method="post">
+                    <label>Select Image</label><br />
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="image" style="height:200px">
+                                <img src="~/img/blog/@Model.Image" height="200" alt="blog" />
+                                <div class="upload">
+                                    <i class="fas fa-upload"></i>
+                                </div>
+                                <input asp-for="Photo" class="file-input" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>Blog Title</label> <br>
+                            <input asp-for="Title" type="text" class="input-text" placeholder="Blog Title" value="@Model.Title">
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-6">
+                            <label asp-for="BlogType.Type">Blog Category</label> <br>
+                            <select class="js-example-basic-single input-text" asp-for="BlogType.Type">
+                                @foreach (BlogType item in ViewBag.Types)
+                                {
+                                    <option value="@item.Type">@item.Type</option>
+
+                                }
+                            </select>
+                        </div>
+                        <div class="col-lg-6">
+                            <label asp-for="BlogTags">Tag</label> <br>
+                            <select class="js-example-basic-multiple input-text" multiple asp-for="BlogTags">
+                                @foreach (Tag item in ViewBag.Tags)
+                                {
+                                    <option value="@item.Name">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="">Blog Description</label><br />
+                            <textarea asp-for="Description"  rows="8" class="input-text" placeholder="Description">
+                                @Model.Description
+                            </textarea>
+                        </div>
+                        <div class="col-lg-6 mt-5">
+                            <button class="btn-post">Edit</button>
+                            <a asp-area="Admin" asp-controller="Job" asp-action="Index" class="btn btn-light">Go Back</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2018 Theme Vessel. Trademarks and brands are the property of their respective owners.</p>
+        </div>
+    </div>
+
+@section Scripts
+    {
+    <script src="~/admin/js/upload.js"></script>
+    <script>
+            // In your Javascript (external .js resource or <script> tag)
+            $(document).ready(function () {
+                $('.js-example-basic-single').select2();
+            });
+            $(document).ready(function() {
+                $('.js-example-basic-multiple').select2();
+            });
+    </script>
+}

@@ -1,0 +1,124 @@
+﻿@model Content
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <div class="row justify-content-center">
+        <div class="col-md-5 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Slider Content</h4>
+                    <form class="forms-sample" method="post" enctype="multipart/form-data">
+                        @if (Model != null)
+                        {
+
+                            <div class="form-group">
+                                <label for="exampleInputName1">Title</label>
+                                <input class="form-control exampleInputName1" asp-for="Title" value="@Model.Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail3">Description</label>
+                                <textarea class="form-control" id="editor" asp-for="Description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="image">
+                                    <img src="~/img/about/@Model.Image" alt="Image" width="300" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>File upload</label>
+                                <input class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                    <input asp-for="Photo" class="form-control file-upload-info" id="upload" accept="image/*" placeholder="Upload Image">
+                                    <span class="input-group-append">
+                                        <button class="file-upload-browse btn btn-info" type="button">Upload</button>
+                                    </span>
+                                </div>
+                                <span asp-validation-for="Photo" class="text-danger"></span>
+                            </div>
+                            <input type="hidden" value="@Model.Description" class="Description" />
+                            <input type="hidden" value="@Model.Title" class="Title" />
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <label for="exampleInputName1">Title</label>
+                                <input class="form-control exampleInputName1" asp-for="Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail3">Description</label>
+                                <textarea asp-for="Description" id="editor1"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>File upload</label>
+                                <input class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                    <input asp-for="Photo" class="form-control file-upload-info" id="upload" accept="image/*" placeholder="Upload Image">
+                                    <span class="input-group-append">
+                                        <button class="file-upload-browse btn btn-info" type="button">Upload</button>
+                                    </span>
+                                </div>
+                                <span asp-validation-for="Photo" class="text-danger"></span>
+                            </div>
+                            }
+                        <button type="submit" class="btn btn-success mr-2">Create/Update</button>
+                        <a class="btn btn-light" asp-controller="Dashboard" asp-action="Index">Go Back</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/20.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                highlight: {
+                    options: [
+                        {
+                            model: 'greenMarker',
+                            class: 'marker-green',
+                            title: 'Green marker',
+                            color: 'var(--ck-highlight-marker-green)',
+                            type: 'marker'
+                        },
+                        {
+                            model: 'redPen',
+                            class: 'pen-red',
+                            title: 'Red pen',
+                            color: 'var(--ck-highlight-pen-red)',
+                            type: 'pen'
+                        }
+                    ]
+                },
+                toolbar: [
+                    'heading', '|', 'bulletedList', 'numberedList', 'highlight', 'undo', 'redo'
+                ]
+            }).then('...').catch('...');
+        ClassicEditor
+            .create(document.querySelector('#editor1'), {
+                highlight: {
+                    options: [
+                        {
+                            model: 'greenMarker',
+                            class: 'marker-green',
+                            title: 'Green marker',
+                            color: 'var(--ck-highlight-marker-green)',
+                            type: 'marker'
+                        },
+                        {
+                            model: 'redPen',
+                            class: 'pen-red',
+                            title: 'Red pen',
+                            color: 'var(--ck-highlight-pen-red)',
+                            type: 'pen'
+                        }
+                    ]
+                },
+                toolbar: [
+                    'heading', '|', 'bulletedList', 'numberedList', 'highlight', 'undo', 'redo'
+                ]
+            }).then('...').catch('...');
+    </script>
+}

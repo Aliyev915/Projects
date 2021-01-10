@@ -1,0 +1,67 @@
+﻿@model Slider
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-5 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Basic form</h4>
+                <p class="card-description"> Basic form elements </p>
+                <form class="forms-sample" id="form" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>File upload</label>
+                        <input class="file-upload-default">
+                    </div>
+                    <div class="form-group">
+                        <div class="image">
+                            <img src="~/img/slider/@Model.Image" alt="Image" width="300" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group col-xs-12">
+                            <input asp-for="Photos" class="form-control file-upload-info" id="upload" accept="image/*" placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-info" id="btn-upload" type="button">Upload</button>
+                            </span>
+                        </div>
+                        <span asp-validation-for="Photos" class="text-danger"></span>
+                    </div>
+                    <input type="submit" class="btn btn-primary mr-2" value="Edit">
+                    <button class="btn btn-light">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        let button = document.querySelector('#btn-upload');
+        button.onclick = function () {
+            $('#upload').click();
+        }
+        $(document).ready(function () {
+            $('#form').submit(function (e) {
+                e.preventDefault();
+                    swal({
+                        title: "Are you sure to upload this file?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                swal("Your file successfully updated!", {
+                                    icon: "success",
+                                });
+                                setTimeout(() => { document.querySelector('#form').submit() }, 2000);
+                            }
+                        });
+            })
+        })
+    </script>
+}

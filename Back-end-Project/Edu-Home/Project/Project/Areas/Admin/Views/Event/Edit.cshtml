@@ -1,0 +1,106 @@
+﻿@model EventVM
+@using System.Text.RegularExpressions;
+@{
+    ViewData["Title"] = "Create";
+}
+<h4 class="card-title">Create</h4>
+<form class="forms-sample" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <h3>Image</h3>
+                        <img src="~/img/event/@Model.Event.Image" alt="Alternate Text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Title</label>
+                        <textarea asp-for="Event.Name" id="editor">{@Regex.Replace(Model.Event.Name, @"<[^>]*>", "")}</textarea>
+                        <span asp-validation-for="Event.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>About</label>
+                        <textarea asp-for="Event.About" id="editor1">{@Regex.Replace(Model.Event.About, @"<[^>]*>", "")}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Speakers</label>
+                        <select class="js-example-basic-multiple form-control" asp-for="EventSpeakers" multiple="multiple">
+                            @foreach (Speaker item in ViewBag.Speakers)
+                            {
+                                <option value="@item.Fullname">@item.Fullname</option>
+                            }
+                        </select>
+                        <input type="hidden" asp-for="Speakers" class="form-control" id="speakers" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Place</label>
+                        <input rows="5" class="form-control exampleInputEmail3" asp-for="Event.Place" value="@Model.Event.Place" />
+                    </div>
+                    <div class="form-group">
+                        <label>Place</label>
+                        <input rows="5" class="form-control exampleInputEmail3" asp-for="Event.Time" value="@Model.Event.Time" />
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="exampleInputName1">Event Starts:</label>
+                                <input class="form-control exampleInputName1" asp-for="Event.StartTime" value="@Model.Event.StartTime">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="exampleInputName1">Event Ends:</label>
+                                <input class="form-control exampleInputName1" asp-for="Event.EndTime" value="@Model.Event.EndTime">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>File upload</label>
+                        <input class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                            <input asp-for="Event.Photo" class="form-control file-upload-info" id="upload" accept="image/*" placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-info" type="button">Upload</button>
+                            </span>
+                        </div>
+                        <span asp-validation-for="Event.Photo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Categories</label>
+                        <select class="js-example-basic-single form-control" asp-for="Category.CategoryName">
+                            @foreach (Category item in ViewBag.Categories)
+                            {
+                                <option value="@item.CategoryName">@item.CategoryName</option>
+                            }
+                        </select>
+                        <input type="hidden" class="form-control" id="category" asp-for="Category" />
+                    </div>
+                    <input type="submit" class="btn btn-primary mr-2" value="Update">
+                    <button class="btn btn-light">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/20.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor1'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}

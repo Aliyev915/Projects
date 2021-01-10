@@ -1,0 +1,247 @@
+﻿@model Bio
+@{ 
+    Layout = null;
+}
+    <!-- header section -->
+    <header>
+        <!-- responsive navbar -->
+        <div class="responsive-navbar">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="logo">
+                        <img src="~/img/logo/@Model.BlackLogo" alt="logo">
+                    </div>
+                    <div class="burger-button">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-list">
+                <ul>
+                    <li>
+                        <a asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li>
+                        <a asp-controller="About" asp-action="Index">About</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Blog" asp-action="Index">Blog</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Employer" asp-action="Index">Employers</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Job" asp-action="Index">Jobs</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Contact" asp-action="Index">Contact Us</a>
+                    </li>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a asp-controller="Account" asp-action="Login"><i class="fas fa-sign-out-alt mr-2"></i> Sign In</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>@ViewBag.User</li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+                        </li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (ViewBag.Role == "Moderator")
+                        {
+                            <div class="addPost">
+                                <a asp-area="Admin" asp-controller="Post" asp-action="Create" class="btnPost"> Post a Job</a>
+                            </div>
+                        }
+                        if (ViewBag.Role == "User")
+                        {
+                            <div class="addPost">
+                                <a asp-controller="Candidate" asp-action="Create" class="btnPost">Add Resume</a>
+                            </div>
+                        }
+                        if (ViewBag.Role == "Admin")
+                        {
+                            <div class="addPost">
+                                <a asp-area="Admin" asp-controller="Dashboard" class="btnPost">Admin Panel</a>
+                            </div>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <!-- responsive navbar -->
+
+        <!-- navbar -->
+        <div class="navbarSection">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2 logo">
+                        <img src="~/img/logo/@Model.Logo" alt="logo">
+                    </div>
+                    <div class="col-7 navbarList">
+                        <ul>
+                            <li>
+                                <a asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li>
+                                <a asp-controller="About" asp-action="Index">About Us</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Employer" asp-action="Index">Employers</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Job" asp-action="Index">Jobs</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Blog" asp-action="Index">Blogs</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Contact" asp-action="Index">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-3 d-flex">
+                        <div class="SignIn">
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <a asp-controller="Account" asp-action="Login"><i class="fas fa-sign-out-alt"></i> Sign In</a>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a asp-controller="Profile" asp-action="Edit" asp-area="Admin" asp-route-username="@ViewBag.User">@ViewBag.User</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                                </li>}
+                        </div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (ViewBag.Role == "Moderator")
+                            {
+                                <div class="addPost">
+                                    <a asp-area="Admin" asp-controller="Post" asp-action="Create" class="btnPost"> Post a Job</a>
+                                </div>
+                            }
+                            if (ViewBag.Role == "User")
+                            {
+                                <div class="addPost">
+                                    <a asp-controller="Candidate" asp-action="Create" class="btnPost">Add Resume</a>
+                                </div>
+                            }
+                            if (ViewBag.Role == "Admin")
+                            {
+                                <div class="addPost">
+                                    <a asp-area="Admin" asp-controller="Dashboard" class="btnPost">Admin Panel</a>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- navbar -->
+
+        <!-- fixed navbar -->
+        <div class="fixed-navbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2 logo">
+                        <img src="~/img/logo/@Model.BlackLogo" alt="logo">
+                    </div>
+                    <div class="col-7 navbarList">
+                        <ul>
+                            <li>
+                                <a asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li>
+                                <a asp-controller="About" asp-action="Index">About Us</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Employer" asp-action="Index">Employers</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Job" asp-action="Index">Jobs</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Blog" asp-action="Index">Blogs</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Contact" asp-action="Index">Contact Us</a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                    <div class="col-3 d-flex">
+                        <div class="SignIn">
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <a asp-controller="Account" asp-action="Login"><i class="fas fa-sign-out-alt"></i> Sign In</a>
+                            }
+                            else
+                            {
+                            <li>
+                                <a>@ViewBag.User</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                            </li>
+                            }
+                        </div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (ViewBag.Role == "Moderator")
+                            {
+                                <div class="addPost">
+                                    <a asp-area="Admin" asp-controller="Post" asp-action="Create" class="btnPost"> Post a Job</a>
+                                </div>
+                            }
+                            if (ViewBag.Role == "User")
+                            {
+                                <div class="addPost">
+                                    <a asp-controller="Candidate" asp-action="Create" class="btnPost">Add Resume</a>
+                                </div>
+                            }
+                            if (ViewBag.Role == "Admin")
+                            {
+                                <div class="addPost">
+                                    <a asp-area="Admin" asp-controller="Dashboard" class="btnPost">Admin Panel</a>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fixed navbar -->
+
+    </header>
+    <!-- header section -->
+
+    @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
+    {
+        <!-- banner-area -->
+        <div class="sub-banner-area">
+            <div class="content">
+                @if (ViewContext.RouteData.Values["action"].ToString() != "Detail")
+                {
+                    <h2>@ViewContext.RouteData.Values["controller"].ToString()S</h2>
+                }
+                else
+                {
+                    <h2>
+                        @(ViewContext.RouteData.Values["controller"].ToString() + " " + ViewContext.RouteData.Values["action"].ToString())
+                    </h2>
+                }
+            </div>
+        </div>
+        <!-- banner-area -->
+    }

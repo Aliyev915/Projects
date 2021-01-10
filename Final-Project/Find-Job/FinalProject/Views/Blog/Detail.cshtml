@@ -1,0 +1,187 @@
+﻿@model BlogDetailVM
+@{
+    ViewBag.Title = Model.Blog.Title;
+}
+
+<!-- blog-area start-->
+<div class="blog-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="container">
+                    <div class="blog-wrapper">
+                        <div class="blog-image">
+                            <img src="~/img/blog/@Model.Blog.Image" alt="">
+                        </div>
+                        <div class="blog-title">
+                            <h3>@Model.Blog.Title</h3>
+                        </div>
+                        <div class="blog-description">
+                            <p>@Model.Blog.Description</p>
+                        </div>
+                        <div class="add-info">
+                            <div class="row justify-content-between">
+                                <div class="tags">
+                                    <div class="tagList">
+                                        <span>Tags</span>
+                                        @foreach (BlogTag item in ViewBag.BlogTags)
+                                        {
+                                            <div class="tag">
+                                                <a href="">@item.Tag.Name</a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="sosial">
+                                    <span>Share</span>
+                                    <a href="" class="facebook">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="" class="twitter">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="" class="google">
+                                        <i class="fab fa-google"></i>
+                                    </a>
+                                    <a href="" class="linkedin">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                    <a href="" class="pinterest">
+                                        <i class="fab fa-pinterest"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-area">
+                        @{
+                            AppUser user = ViewBag.User;
+                        }
+                        <h3>Comments Section</h3>
+                        <form method="post">
+                            @foreach (Comment item in ViewBag.Comments)
+                            {
+                                <div class="comment">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <div class="user">
+                                                @if (user.Image != null)
+                                                {
+                                                    <img src="~/img/avatar/@user.Image" alt="">
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/img/user.png" alt="">
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="col-10">
+                                            <div class="comment-message">
+                                                <div class="username">@item.AppUser.Fullname</div>
+                                                <div class="datetime">
+                                                    <span style="margin-right: 20px;">@item.Time.ToString("h:mm tt dd/MM/yyyy")</span>
+                                                    <span class="reply" style="color: #376bff; font-weight: bold; cursor: pointer">Reply</span>
+                                                </div>
+                                                <div class="message">
+                                                    <p>
+                                                        @item.Text
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" asp-for="Reply" value="@item.Id" />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        <div class="leave-comment">
+                            <div class="row">
+                                <div class="col-1">
+                                    <div class="image">
+                                        <img src="~/img/avatar/avatar-1.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-10">
+                                    <div class="form-group">
+                                        <textarea class="comment-input" asp-for="Message" placeholder="leave a comment"></textarea>
+                                    </div>
+                                </div>
+                                <div class="send">
+                                    <button class="btn-send" disabled>Comment</button>
+                                    <a href="" class="btn btn-send bg-light text-dark">Cancel</a>
+                                </div>
+                            </div>
+                        </div>                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="search-side">
+                    <form action="">
+                        <div class="form-group search-input">
+                            <h3>Search</h3>
+                            <input type="text" class="form-control" placeholder="Search Keywords">
+                            <button style="top:75%; right:3%"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                    <div class="recent-post">
+                        <h3>Recent Posts</h3>
+                        @foreach (Blog item in ViewBag.Blogs)
+                        {
+                            <div class="post">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="image">
+                                            <img src="~/img/blog/@item.Image" alt="blog">
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="post-detail">
+                                            <div class="title">
+                                                <h6>
+                                                    <a asp-controller="Blog" asp-action="Detail" asp-route-Id="@item.Id">
+                                                        @item.Title
+                                                    </a>
+                                                </h6>
+                                            </div>
+                                            <div class="info">
+                                                <span>$3000</span>
+                                                <span>
+                                                    <i class="far fa-calendar-alt"></i>
+                                                    @item.Time.ToString("dd MMMM, yyyy")
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="categoryList">
+                        <h3>Categories</h3>
+                        @foreach (BlogType item in ViewBag.Categories)
+                        {
+                            IEnumerable<Blog> blogs = ViewBag.BlogCount;
+                            <div class="category">
+                                <div class="row justify-content-between">
+                                    <p>@item.Type</p>
+                                    <p>(@blogs.Where(b => b.BlogTypeId == item.Id).Count())</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="tagList">
+                        <h3>Tags</h3>
+                        @foreach (Tag item in ViewBag.Tags)
+                        {
+                            <div class="tag">
+                                <a href="@Url.Action("TagSearch","Blog",new { tag=item.Name})">@item.Name</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- blog-area end -->

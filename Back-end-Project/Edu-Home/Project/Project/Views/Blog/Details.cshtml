@@ -1,0 +1,132 @@
+﻿@model BlogVM
+@{
+    ViewData["Title"] = "Details";
+}
+
+<!-- Blog Start -->
+<div class="blog-details-area pt-150 pb-140">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="blog-details">
+                    <div class="blog-details-img">
+                        <img src="~/img/blog/@Model.Blog.Image" alt="blog-details">
+                    </div>
+                    <div class="blog-details-content">
+                        <h2>@Html.Raw(Model.Blog.Description)</h2>
+                        <h6>By Alex  /  June 20, 2017  /  <i class="fa fa-comments-o"></i> 4</h6>
+                        @Html.Raw(Model.Blog.About)
+                    </div>
+                    @foreach (Reply reply in ViewBag.Replies)
+                    {
+                        <div class="row mb-100">
+                            <div class="col-md-2">
+                                <div class="image">
+                                    <img src="~/img/download.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="d-flex date" style="margin-left: 30px;">
+                                    <p style="margin-bottom: 5px;">@reply.AppUser.Fullname</p>
+                                    <p>@reply.Time</p>
+                                </div>
+                                <div class="reply-message" style="margin-top: 15px;">
+                                    <p style="margin-left:-30px" >
+                                        @reply.Message
+                                    </p>
+                                </div>
+                            </div>
+                            @if (ViewBag.Role == "Admin")
+                            {
+                            <div class="col-md-1">
+                                <a asp-controller="Blog" asp-action="DeleteReply" asp-route-Id="@reply.Id">
+                                    <i class="fas fa-times text-danger" style="margin-top:20px;font-size:30px"></i>
+                                </a>
+                            </div>
+                            }
+                        </div>
+                    }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="reply-area">
+                                <h3>LEAVE A REPLY</h3>
+                                <p>
+                                    I must explain to you how all this a mistaken idea of ncing great explorer of the rut<br>
+                                    the is lder of human happinescias unde omnis iste natus error sit volptatem
+                                </p>
+                                <div class="row" id="replies">
+                                    <input type="hidden" id="blog" value="@Model.Blog.Id" />
+                                </div>
+                                <form class="form-group" method="post">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>Message</p>
+                                            <textarea asp-for="Message" id="message" cols="15" rows="10"></textarea>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary col-md-4 mr-2">Leave a Reply</button>
+                                </form>
+                            </div>
+                        }
+                    </div>
+            </div>
+            <div class="col-md-4">
+                <div class="blog-sidebar right">
+                    <div class="single-blog-widget detail-category mb-47">
+                        <h3>categories</h3>
+                        <ul>
+                            @foreach (Category item in Model.Categories)
+                            {
+                            <li>
+                                <a asp-controller="Blog" asp-action="Categories" asp-route-Id="@item.Id">
+                                    @Html.Raw(item.CategoryName) (@Model.Blogs.Where(b => b.CategoryId == item.Id).Count())
+                                </a>
+                                <input type="hidden" value="@item.Id" id="DataId" />
+                            </li>
+
+                            }
+                        </ul>
+                    </div>
+                    <div class="single-blog-widget mb-47">
+                        <div class="single-blog-banner">
+                            <a href="blog-details.html" id="blog"><img src="~/img/blog/blog-img.jpg" alt="blog"></a>
+                            <h2>best<br> eductaion<br> theme</h2>
+                        </div>
+                    </div>
+                    <div class="single-blog-widget mb-47">
+                        <h3>latest post</h3>
+                        @foreach (Blog item in Model.Blogs.TakeLast(3))
+                        {
+                            <div class="single-post mb-30">
+                                <div class="single-post-img">
+                                    <a href="blog-details.html">
+                                        <img src="~/img/blog/@item.Image" style="height:80px" alt="post">
+                                        <div class="blog-hover">
+                                            <i class="fa fa-link"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="single-post-content">
+                                    <h4><a href="blog-details.html">@Html.Raw(item.Description)</a></h4>
+                                    <p>By Alex  /  June 20, 2017</p>
+                                </div>
+                            </div>
+
+                        }
+
+                    </div>
+                    <div class="single-blog-widget">
+                        <h3>tags</h3>
+                        <div class="single-tag">
+                            @foreach (Tag item in Model.Tags)
+                            {
+                                <a href="blog-details.html" class="mr-10 mb-10">@item.TagName</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog End -->

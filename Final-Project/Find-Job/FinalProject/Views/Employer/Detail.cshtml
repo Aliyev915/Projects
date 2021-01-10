@@ -1,0 +1,151 @@
+﻿@model Company
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<!--candidate detail start  -->
+<div class="employer-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="left-section">
+                    <div class="employer-feature">
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="image">
+                                    <img src="~/img/company-logo/@Model.Logo" alt="">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="info">
+                                    <div class="name">
+                                        @Model.Name
+                                    </div>
+                                    <span><i class="fas fa-map-marker-alt"></i>@Model.Adress</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="employer-about">
+                        <h3>About Me</h3>
+                        <p>
+                            @Model.About
+                        </p>
+                    </div>
+                    <div class="related-job">
+                        <h3>Related Jobs</h3>
+                        <div class="job-list">
+                            @foreach (Job item in ViewBag.Jobs)
+                            {
+                                <div class="job-about">
+                                    <div class="row">
+                                        <div class="col-lg-2 col-sm-4">
+                                            <div class="company-logo">
+                                                <img src="~/img/company-logo/@item.Company.Logo" alt="logo">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-sm">
+                                            <div class="name">
+                                                <h5>@item.Name</h5>
+                                            </div>
+                                            <div class="add-info">
+                                                <div class="row">
+                                                    <p><i class="fas fa-briefcase"></i>@item.Category.Name</p>
+                                                    <p><i class="fas fa-map-marker-alt"></i>@item.Location.Name</p>
+                                                    <p><i class="far fa-clock"></i> Full Time</p>
+                                                </div>
+                                            </div>
+                                            <div class="deadline">
+                                                <p>Deadline: 
+                                                    @item.Deadline.ToString("MMMM").Substring(0,3) @item.Deadline.Day, @item.Deadline.Year                                                
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="row">
+                                                <div class="favorite">
+                                                    <i class="far fa-heart"></i>
+                                                </div>
+                                                <div class="apply">
+                                                    <a asp-controller="Job" asp-action="Detail" asp-route-Id="@item.Id" class="btn-apply">
+                                                        Apply Now
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="right-section">
+                    <div class="download">
+                        <button class="btn-download">
+                            @Model.Jobs.Where(j => j.CompanyId == Model.Id).Count() open positions
+                        </button>
+                    </div>
+                    <div class="save">
+                        <button class="btn-save">
+                            save
+                        </button>
+                    </div>
+                    <div class="search-side">
+                        <div class="overview">
+                            <h3>Job Overview</h3>
+                            <div class="row">
+                                <div class="col-3">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <div class="col-9">
+                                    <h5 style="font-weight: bold;">Viewed</h5>
+                                    <p>25470</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <i class="far fa-address-card"></i>
+                                </div>
+                                <div class="col-9">
+                                    <h5 style="font-weight: bold;">Posted Job</h5>
+                                    <p>@Model.Jobs.Where(j => j.CompanyId == Model.Id).Count()</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="col-9">
+                                    <h5 style="font-weight: bold;">Location</h5>
+                                    <p>@Model.Adress</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <i class="far fa-user"></i>
+                                </div>
+                                <div class="col-9">
+                                    <h5 style="font-weight: bold;">Followers</h5>
+                                    <p>14</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="quick-contact">
+                            <h3>Quick Contact</h3>
+                            <form action="">
+                                <input type="text" placeholder="Name">
+                                <input type="text" placeholder="Name">
+                                <textarea rows="5" placeholder="Write message"></textarea>
+                                <button class="btn-send">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--candidate detail end  -->

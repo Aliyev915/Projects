@@ -1,0 +1,128 @@
+﻿@model AboutVM
+@{
+    ViewData["Title"] = "About Us";
+}
+
+
+<!-- categories end -->
+<div class="categories">
+    <div class="container">
+        <div class="content">
+            <div class="title">
+                <h2>Popular Categories</h2>
+            </div>
+            <div class="description">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+        </div>
+        <div class="job-category">
+            <div class="row">
+                @foreach (Category item in Model.Categories)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="icon">
+                            @Html.Raw(item.Icon)
+                        </div>
+                        <div class="name">
+                            @item.Name
+                        </div>
+                        <div class="count">
+                            (@item.Jobs.Count)
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- categories end -->
+<!-- Our Services start -->
+<div class="service-area">
+    <div class="container">
+        <div class="title">
+            <h2>Our Service</h2>
+        </div>
+        <div class="description">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="service">
+            <div class="row">
+                @foreach (Service item in Model.Services)
+                {
+                    <div class="col-lg-4">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                @Html.Raw(item.Icon)
+                            </div>
+                            <div class="service-title">
+                                <h3>@item.Title</h3>
+                            </div>
+                            <div class="service-text">
+                                <p>@item.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Our Services end -->
+
+<!-- statistics start -->
+<div class="statistics">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            @foreach (Statistic item in Model.Statistics)
+            {
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="member">
+                        @Html.Raw(item.Icon)
+                        @if (item.Title == "Members")
+                        {
+                            <h1 class="counter text-white" data-to="@ViewBag.UserCount"></h1>
+                        }
+                        @if (item.Title == "Jobs")
+                        {
+                            <h1 class="counter text-white" data-to="@ViewBag.JobCount"></h1>
+                        }
+                        @if (item.Title == "Resumes")
+                        {
+                            <h1 class="counter text-white" data-to="@ViewBag.ResumeCount"></h1>
+                        }
+                        @if (item.Title == "Companies")
+                        {
+                            <h1 class="counter text-white" data-to="@ViewBag.CompanyCount"></h1>
+                        }
+                        <p class="text-white">@item.Title</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- statistics end -->
+
+<!-- partnership companies start -->
+<div class="partnership-company">
+    <div class="container">
+        <div class="content">
+            <div class="title">
+                <h2>Companies We've Helped</h2>
+            </div>
+            <div class="description">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+        <div class="row owl-carousel">
+            @foreach (Company item in Model.Companies)
+            {
+                <div class="brand">
+                    <img src="~/img/company-logo/@item.Logo" alt="">
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- partnership companies end -->

@@ -1,0 +1,60 @@
+﻿@model Setting
+@using System.Text.RegularExpressions;
+@{
+    ViewData["Title"] = "Content";
+}
+
+@if (Model != null)
+{
+    <div class="row justify-content-center">
+        <div class="col-md-5 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Slider Content</h4>
+                    <form class="forms-sample" method="post">
+                        <div class="form-group">
+                            <label for="exampleInputName1">Title</label>
+                            <input class="form-control exampleInputName1" id="inputTitle" asp-for="Title" value="@Model.Title">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail3">Description</label>
+                            <textarea rows="5" class="form-control exampleInputEmail3" id="inputDescription" asp-for="Description">
+                                @Regex.Replace(Model.Description, @"<[^>]*>", "")
+                            </textarea>
+                        </div>
+                        <input type="hidden" value="@Model.Description" class="Description" />
+                        <input type="hidden" value="@Model.Title" class="Title" />
+                        <button type="submit" class="btn btn-success mr-2">Create/Update</button>
+                        <button class="btn btn-light" asp-action="Index">Go Back</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row justify-content-center">
+        <div class="col-md-5 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Slider Content</h4>
+                    <form class="forms-sample" method="post">
+                        <div class="form-group">
+                            <label for="exampleInputName1">Title</label>
+                            <input class="form-control exampleInputName1" asp-for="Title">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail3">Description</label>
+                            <textarea rows="5" class="form-control exampleInputEmail3" asp-for="Description"></textarea>
+                        </div>
+                        <input type="hidden"  class="Description" />
+                        <input type="hidden"  class="Title" />
+                        <button type="submit" class="btn btn-success mr-2">Create/Update</button>
+                        <button class="btn btn-light" asp-action="Index">Go Back</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,38 @@
+﻿@model SearchVM
+
+@if (ViewContext.RouteData.Values["controller"].ToString() == "Course")
+{
+    @foreach (Course item in Model.Courses.TakeLast(5))
+    {
+        <li style="text-align:left; margin-bottom:3px; font-size:17px">
+            <a asp-controller="Course" asp-action="Details" asp-route-Id="@item.Id">@Html.Raw(item.Title)</a>
+        </li>
+    }
+}
+else if (ViewContext.RouteData.Values["controller"].ToString() == "Teacher")
+{
+    @foreach (Teacher item in Model.Teachers.TakeLast(5))
+    {
+        <li style="text-align:left; margin-bottom:3px; font-size:17px">
+            <a asp-controller="Teacher" asp-action="Details" asp-route-Id="@item.Id">@Html.Raw(item.Name)</a>
+        </li>
+    }
+}
+else if (ViewContext.RouteData.Values["controller"].ToString() == "Event")
+{
+    @foreach (Event item in Model.Events.TakeLast(5))
+    {
+        <li style="text-align:left; margin-bottom:3px; font-size:17px">
+            <a asp-controller="Event" asp-action="Details" asp-route-Id="@item.Id">@Html.Raw(item.Name)</a>
+        </li>
+    }
+}
+else
+{
+    @foreach (Blog item in Model.Blogs.TakeLast(5))
+    {
+        <li style="text-align:left; margin-bottom:3px; font-size:17px">
+            <a asp-controller="Blog" asp-action="Details" asp-route-Id="@item.Id">@Html.Raw(item.Description)</a>
+        </li>
+    }
+}

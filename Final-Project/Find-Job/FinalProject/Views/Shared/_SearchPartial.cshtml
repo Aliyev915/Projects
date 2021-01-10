@@ -1,0 +1,337 @@
+﻿@model SearchVM
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@if (ViewContext.RouteData.Values["Controller"].ToString() == "Candidate")
+{
+    if (Model.Candidates.Count() == 0)
+    {
+    }
+    else
+    {
+    <div class="candidates">
+        @foreach (Candidate item in Model.Candidates)
+        {
+            <div class="candidate">
+                <div class="row">
+                    <div class="col-md-2 col-sm-3">
+                        @if (item.Image == null)
+                        {
+                            <div class="image">
+                                <img src="~/img/user.png" alt="candidate">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="image">
+                                <img src="~/img/@item.AppUser.Image" alt="candidate">
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-6 col-sm-8 px-4">
+                        <div class="about">
+                            <div class="name">
+                                @item.Fullname
+                            </div>
+                            <span><i class="far fa-check-circle"></i>@item.Profession</span>
+                            <span><i class="fas fa-map-marker-alt"></i>@item.Location.Name</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 offset-md-1 offset-sm-3">
+                        <div class="btn-resume">
+                            <a asp-controller="Candidate" asp-action="Detail" asp-route-Id="@item.Id">Wiew Resume</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="pagination">
+            <ul>
+                @if (Math.Ceiling((decimal)ViewBag.Candidates / 4) > 1)
+                {
+
+                    @if (ViewBag.Page != null)
+                    {
+                        int prev = ViewBag.Page - 1;
+                        if (ViewBag.Page != 1)
+                        {
+                            <li>
+                                <a asp-action="Index" asp-route-Id="@prev">Prev</a>
+                            </li>
+                        }
+                    }
+                    @for (int i = 1; i <= Math.Ceiling((decimal)ViewBag.Candidates / 4); i++)
+                    {
+                        @if (ViewBag.Page == null)
+                        {
+                            if (i == 1)
+                            {
+                                <li>
+                                    <a asp-action="Index" asp-route-Id="@i" class="actived">@i</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a asp-action="Index" asp-route-Id="@i">@i</a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            if (i == ViewBag.Page)
+                            {
+                                <li>
+                                    <a asp-action="Index" asp-route-Id="@i" class="actived">@i</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a asp-action="Index" asp-route-Id="@i">@i</a>
+                                </li>
+                            }
+                        }
+                    }
+                    @if (ViewBag.Page != null)
+                    {
+                        int next = ViewBag.Page + 1;
+                        if (ViewBag.Page != Math.Ceiling((decimal)ViewBag.Candidates / 4))
+                        {
+                            <li>
+                                <a asp-action="Index" asp-route-Id="@next">Next</a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li>
+                            <a asp-action="Index" asp-route-Id="2">Next</a>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+    }
+}
+
+@if (ViewContext.RouteData.Values["Controller"].ToString() == "Job")
+{
+    if (Model.Jobs.Count() == 0)
+    {
+        <div class="jobs">
+            <div class="text-center">Not Found For Search</div>
+        </div>
+    }
+    else
+    {
+        <div class="jobs">
+            @foreach (Job item in Model.Jobs)
+            {
+                <div class="job">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-4">
+                            <div class="company-logo">
+                                <img src="~/img/company-logo/@item.Company.Logo" alt="logo">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-8">
+                            <div class="name">
+                                <h5>
+                                    <a asp-controller="Job" asp-action="Detail" asp-route-Id="@item.Id">@item.Name</a>
+                                </h5>
+                            </div>
+                            <div class="add-info">
+                                <div class="row">
+                                    <p><i class="fas fa-briefcase"></i>@item.Category.Name</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> @item.Location.Name</p>
+                                    @*<p><i class="far fa-clock"></i>@item.Type.Name</p>*@
+                                </div>
+                            </div>
+                            <div class="deadline">
+                                <p>Deadline: @item.Deadline.ToString("MMMM").Substring(0, 3) @item.Deadline.Day, @item.Deadline.Year</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="favorite">
+                                    <i class="far fa-heart"></i>
+                                </div>
+                                <div class="apply">
+                                    <a asp-controller="Job" asp-action="Detail" asp-route-Id="@item.Id" class="btn-apply">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="pagination">
+                <ul>
+                    @if (ViewBag.Jobs > 1)
+                    {
+
+                        @if (ViewBag.Page != null)
+                        {
+                            int prev = ViewBag.Page - 1;
+                            if (ViewBag.Page != 1)
+                            {
+                                <li>
+                                    <a asp-action="Index" asp-route-Id="@prev">Prev</a>
+                                </li>
+                            }
+                        }
+                        @for (int i = 1; i <= Math.Ceiling(decimal.Parse((ViewBag.Jobs / 4).ToString())); i++)
+                        {
+                            @if (ViewBag.Page == null)
+                            {
+                                if (i == 1)
+                                {
+                                    <li>
+                                        <a asp-action="Index" asp-route-Id="@i" class="actived">@i</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a asp-action="Index" asp-route-Id="@i">@i</a>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                if (i == ViewBag.Page)
+                                {
+                                    <li>
+                                        <a asp-action="Index" asp-route-Id="@i" class="actived">@i</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a asp-action="Index" asp-route-Id="@i">@i</a>
+                                    </li>
+                                }
+                            }
+                        }
+                        @if (ViewBag.Page != null)
+                        {
+                            int next = ViewBag.Page + 1;
+                            if (ViewBag.Page != Math.Ceiling(decimal.Parse((ViewBag.Jobs / 4).ToString())))
+                            {
+                                <li>
+                                    <a asp-action="Index" asp-route-Id="@next">Next</a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <a asp-action="Index" asp-route-Id="2">Next</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+}
+
+@if (ViewContext.RouteData.Values["Controller"].ToString() == "Blog")
+{
+    if (Model.Blogs.Count() == 0)
+    {
+
+    }
+    else
+    {
+        <div class="blogs">
+            <div class="container">
+                <div class="row">
+                    @foreach (Blog item in Model.Blogs)
+                    {
+                        <div class="col-md-6">
+                            <div class="blog">
+                                <div class="image">
+                                    <a asp-controller="Blog" asp-action="Detail"><img src="~/img/blog/@item.Image" alt=""></a>
+                                    <div class="date">
+                                        <p class="text-white">@item.Time.ToString("dd")</p>
+                                        <p class="text-white">@item.Time.ToString("MMMM").Substring(0, 3)</p>
+                                    </div>
+                                </div>
+                                <div class="blog-detail">
+                                    <div class="title">
+                                        <h3>
+                                            <a asp-controller="Blog" asp-action="Detail" asp-route-Id="@item.Id">@item.Title</a>
+                                        </h3>
+                                    </div>
+                                    <div class="features">
+                                        <p><i class="fas fa-user"></i> Admin</p>
+                                        <p><i class="far fa-comment-dots"></i> 27</p>
+                                        <p><i class="far fa-heart"></i>27</p>
+                                    </div>
+                                    <div class="description">
+                                        @if (item.Description.Length <= 100)
+                                        {
+                                            @item.Description
+                                        }
+                                        else
+                                        {
+                                            @item.Description.Substring(0, 100)
+                                        }
+                                    </div>
+                                    <div class="readMore">
+                                        <a asp-controller="Blog" asp-action="Detail" asp-route-Id="@item.Id">Read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@if (ViewContext.RouteData.Values["Controller"].ToString() == "Employer")
+{
+    if (Model.Companies.Count() == 0)
+    {
+    }
+    else
+    {
+        <div class="employers">
+            @foreach (Company item in Model.Companies)
+            {
+                <div class="employer">
+                    <div class="row">
+                        <div class="col-lg-2 col-sm-3">
+                            <div class="image">
+                                <img src="~/img/company-logo/@item.Logo" alt="job">
+                            </div>
+                        </div>
+                        <div class="col-lg-10 col-sm">
+                            <div class="name">
+                                <h4>@item.Name</h4>
+                            </div>
+                            <div class="about">
+                                <span><i class="fas fa-map-marker-alt"></i>Baku</span>
+                                <a asp-controller="Employer" asp-action="Detail" asp-route-Id="@item.Id">
+                                    @item.Jobs.Where(j => j.CompanyId == item.Id).Count() Open Position
+                                </a>
+                            </div>
+                            <div class="description">
+                                <p>
+                                    @item.About
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}

@@ -1,0 +1,184 @@
+﻿@model Candidate
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<!--candidate detail start  -->
+<div class="candidate-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="left-section">
+                    <div class="candidate-feature">
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="image">
+                                    <img src="~/img/@Model.AppUser.Image" alt="">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="info">
+                                    <div class="name">
+                                        @Model.Fullname
+                                    </div>
+                                    <span><i class="far fa-check-circle"></i> @Model.Profession</span>
+                                    <span><i class="fas fa-map-marker-alt"></i> @Model.Location.Name</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="candidate-about">
+                        <h3>About Me</h3>
+                        <p>
+                            @Model.About
+                        </p>
+                    </div>
+                    <div class="candidate-education">
+                        <h3>Education</h3>
+                        @foreach (Candidate_Education item in Model.Candidate_Education)
+                        {
+                            if (item.School != "none")
+                            {
+                                <div class="row my-5">
+                                    <div class="col-2">
+                                        <div class="icon">
+                                            <i class="fas fa-graduation-cap"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="speciality">
+                                            <p>@item.School</p>
+                                            <p>/ @item.Speciality</p>
+                                        </div>
+                                        <div class="year ">
+                                            <p>@item.EducationYear</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="candidate-experience">
+                        <h3>Work Experience</h3>
+                        @foreach (Candidate_Experience item in Model.Candidate_Experience)
+                        {
+                            if (item.Company != "none")
+                            {
+                                <div class="row my-5">
+                                    <div class="col-2">
+                                        <div class="icon">
+                                            <i class="fas fa-briefcase"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="speciality">
+                                            <p>@item.Company</p>
+                                            <p>/ @item.Speciality</p>
+                                        </div>
+                                        <div class="year ">
+                                            <p>@item.ExperienceYear</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="candidate-skill">
+                        <h3>Professional Skills</h3>
+                        <div class="skill my-3">
+                            <div class="row justify-content-between px-3">
+                                <p>Community</p>
+                                <p>@Model.Candidate_Skill.Community%</p>
+                            </div>
+                            <div class="bar">
+                                <div class="progress-skill" style="width: @Model.Candidate_Skill.Community%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill my-3">
+                            <div class="row justify-content-between px-3">
+                                <p>Speciality</p>
+                                <p>@Model.Candidate_Skill.Speciality%</p>
+                            </div>
+                            <div class="bar">
+                                <div class="progress-skill" style="width: @Model.Candidate_Skill.Speciality%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill my-3">
+                            <div class="row justify-content-between px-3">
+                                <p>Language</p>
+                                <p>@Model.Candidate_Skill.Language%</p>
+                            </div>
+                            <div class="bar">
+                                <div class="progress-skill" style="width: @Model.Candidate_Skill.Language%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill my-3">
+                            <div class="row justify-content-between px-3">
+                                <p>LeaderShip</p>
+                                <p>@Model.Candidate_Skill.LeaderShip%</p>
+                            </div>
+                            <div class="bar">
+                                <div class="progress-skill" style="width: @Model.Candidate_Skill.LeaderShip%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="right-section">
+                    <div class="search-side">
+                        <div class="overview">
+                            <h3>Job Overview</h3>
+                            <div class="row">
+                                <div class="col-3">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                </div>
+                                <div class="col-9">
+                                    <h5 style="font-weight: bold;">Salary</h5>
+                                    <p>@Model.Salary</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="col-9">
+                                    <h5 style="font-weight: bold;">Location</h5>
+                                    <p>@Model.Location.Name</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="col-9">
+                                    <h5 style="font-weight: bold;">Job Type</h5>
+                                    <p>@Model.Type</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="col-9">
+                                    <h5 style="font-weight: bold;">Experience</h5>
+                                    <p>@ViewBag.Experience Years</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="quick-contact">
+                            <h3>Quick Contact</h3>
+                            <form action="">
+                                <input type="text" placeholder="Name">
+                                <input type="text" placeholder="Name">
+                                <textarea rows="5" placeholder="Write message"></textarea>
+                                <button class="btn-send">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--candidate detail end  -->

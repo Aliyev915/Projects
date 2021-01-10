@@ -1,0 +1,134 @@
+﻿@model IEnumerable<Candidate>
+@{
+    ViewData["Title"] = "Candidates";
+}
+
+    <input type="hidden" id="controller" value="@ViewContext.RouteData.Values["Controller"]"/>
+<!--candidate listing start  -->
+<div class="job-search-listing">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="right-section">
+                    <div class="d-flex sort-section">
+                        <div class="col-6">
+                            <h6 style="font-weight: bold; margin-top: 8px;">Sort By:</h6>
+                        </div>
+                        <div class="col-6">
+                            <select class="form-control" id="sort">
+                                <option value="new">newest</option>
+                                <option value="old">oldest</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="candidates">
+                        @foreach (Candidate item in Model)
+                        {
+                            <div class="candidate">
+                                <div class="row">
+                                    <div class="col-md-2 col-sm-3">
+                                        @if (item.Image == null)
+                                        {
+                                            <div class="image">
+                                                <img src="~/img/user.png" alt="candidate">
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="image">
+                                                <img src="~/img/@item.AppUser.Image" alt="candidate">
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="col-md-6 col-sm-8 px-4">
+                                        <div class="about">
+                                            <div class="name">
+                                                @item.Fullname
+                                            </div>
+                                            <span><i class="far fa-check-circle"></i>@item.Profession</span>
+                                            <span><i class="fas fa-map-marker-alt"></i>@item.Location.Name</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 offset-md-1 offset-sm-3">
+                                        <div class="btn-resume">
+                                            <a asp-controller="Candidate" asp-action="Detail" asp-route-name="@item.Fullname">Wiew Resume</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="pagination">
+                            <ul>
+                                @if (Math.Ceiling((decimal)ViewBag.Candidates / 4) > 1)
+                                {
+
+                                    @if (ViewBag.Page != null)
+                                    {
+                                        int prev = ViewBag.Page - 1;
+                                        if (ViewBag.Page != 1)
+                                        {
+                                            <li>
+                                                <a asp-action="Index" asp-route-Id="@prev">Prev</a>
+                                            </li>
+                                        }
+                                    }
+                                    @for (int i = 1; i <= Math.Ceiling((decimal)ViewBag.Candidates / 4); i++)
+                                    {
+                                        @if (ViewBag.Page == null)
+                                        {
+                                            if (i == 1)
+                                            {
+                                                <li>
+                                                    <a asp-action="Index" asp-route-Id="@i" class="actived">@i</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a asp-action="Index" asp-route-Id="@i">@i</a>
+                                                </li>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (i == ViewBag.Page)
+                                            {
+                                                <li>
+                                                    <a asp-action="Index" asp-route-Id="@i" class="actived">@i</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a asp-action="Index" asp-route-Id="@i">@i</a>
+                                                </li>
+                                            }
+                                        }
+                                    }
+                                    @if (ViewBag.Page != null)
+                                    {
+                                        int next = ViewBag.Page + 1;
+                                        if (ViewBag.Page != Math.Ceiling((decimal)ViewBag.Candidates / 4))
+                                        {
+                                            <li>
+                                                <a asp-action="Index" asp-route-Id="@next">Next</a>
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a asp-action="Index" asp-route-Id="2">Next</a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--candidate listing end  -->

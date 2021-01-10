@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Company>
+@{
+    ViewData["Title"] = "Employers";
+}
+
+<input type="hidden" id="controller" value="@ViewContext.RouteData.Values["Controller"]" />
+<!--employer listing start  -->
+<div class="job-search-listing">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="right-section">
+                    <div class="d-flex sort-section">
+                        <div class="col-6">
+                            <h6 style="font-weight: bold; margin-top: 8px;">Sort By:</h6>
+                        </div>
+                        <div class="col-6">
+                            <select class="form-control" id="sort">
+                                <option value="new">newest</option>
+                                <option value="old">oldest</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="employers">
+                        @foreach (Company item in Model)
+                        {
+                            <div class="employer">
+                                <div class="row">
+                                    <div class="col-lg-2 col-sm-3">
+                                        <div class="image">
+                                            <img src="~/img/company-logo/@item.Logo" alt="job">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10 col-sm">
+                                        <div class="name">
+                                            <h4>@item.Name</h4>
+                                        </div>
+                                        <div class="about">
+                                            <span><i class="fas fa-map-marker-alt"></i>Baku</span>
+                                            <a href="@Url.Action("Detail","Employer" ,new {slug=@item.Slug })">
+                                                @item.Jobs.Where(j => j.CompanyId == item.Id).Count() Open Position
+                                            </a>
+                                        </div>
+                                        <div class="description">
+                                            <p>
+                                                @item.About
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="pagination">
+                            <ul>
+                                <li>
+                                    <a href="">Prev</a>
+                                </li>
+                                <li>
+                                    <a href="" class="actived">1</a>
+                                </li>
+                                <li>
+                                    <a href="">2</a>
+                                </li>
+                                <li>
+                                    <a href="">3</a>
+                                </li>
+                                <li>
+                                    <a href="">Next</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--employer listing end  -->
+
+@section Scripts{
+    <script src="~/js/search.js"></script>
+}

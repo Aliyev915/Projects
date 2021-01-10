@@ -1,0 +1,51 @@
+﻿@model List<UserVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                User
+            </th>
+            <th>
+                Roles
+            </th>
+            <th>
+                Settings
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (UserVM item in Model)
+        {
+            <tr>
+
+                <td class="py-1">
+                    <h5>@item.Email</h5>
+                </td>
+                <td class="py-1">
+                    <h5>@item.Role</h5>
+                </td>
+                <td>
+                    <a class="btn btn-info" asp-action="Detail" asp-route-username="@item.Username">
+                        <i class="mdi mdi-account-card-details"></i>
+                    </a>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-username="@item.Username">
+                        <i class="mdi mdi-table-edit"></i>
+                    </a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-username="@item.Username">
+                        <i class="mdi mdi-delete-variant"></i>
+                    </a>
+                    <a class="btn btn-success" asp-action="Change" asp-route-username="@item.Username">
+                        <i class="mdi mdi-account-check"></i>
+                    </a>
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+

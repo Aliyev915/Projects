@@ -1,0 +1,135 @@
+﻿@model CourseVM
+
+@{
+    ViewData["Title"] = "CourseDetails";
+}
+
+<!-- Blog Start -->
+<div class="courses-details-area blog-area pt-150 pb-140">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="courses-details">
+                    <div class="courses-details-img">
+                        <img src="~/img/course/@Model.Course.Image" alt="courses-details">
+                    </div>
+                    <div class="course-details-content">
+                        <h2>@Html.Raw(Model.Course.Title)</h2>
+                        <p>@Html.Raw(Model.Course.Description)</p>
+                        <div class="course-details-left">
+                            <div class="single-course-left">
+                                <h3>about course</h3>
+                                <p>@Html.Raw(Model.Course.CourseFeatures.About)</p>
+                            </div>
+                            <div class="single-course-left">
+                                <h3>how to apply</h3>
+                                <p>@Html.Raw(Model.Course.CourseFeatures.Apply)</p>
+                            </div>
+                            <div class="single-course-left">
+                                <h3>certification</h3>
+                                <p>@Html.Raw(Model.Course.CourseFeatures.Certification)</p>
+                            </div>
+                            <div class="single-course-left">
+                                <h3>Assestements</h3>
+                                <p>@Html.Raw(Model.Course.CourseFeatures.Assestement)</p>
+                            </div>
+
+                        </div>
+                        <div class="course-details-right">
+                            <h3>COURSE FEATURES</h3>
+                            <ul>
+                                <li>starts <span>@Model.Course.CourseFeatures.StartTime</span></li>
+                                <li>duration <span>@Model.Course.CourseFeatures.Duration Month</span></li>
+                                <li>class duration <span>@Model.Course.CourseFeatures.ClassDuration hours</span></li>
+                                <li>skill level <span>@Model.Course.CourseFeatures.SkillLevel</span></li>
+                                <li>language <span>English</span></li>
+                                <li>students <span>@Model.Course.CourseFeatures.Student</span></li>
+                            </ul>
+                            <h3 class="red">course fee $@Model.Course.CourseFeatures.Fee</h3>
+                        </div>
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="reply-area">
+                            <h3>LEAVE A REPLY</h3>
+                            <p>I must explain to you how all this a mistaken idea of ncing great explorer of the rut<br> the is lder of human happinescias unde omnis iste natus error sit volptatem </p>
+                            <form class="form-group" method="post">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>Name</p>
+                                        <input type="text" asp-for="Name" id="name">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p>Email</p>
+                                        <input type="text" asp-for="Email" id="email">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p>Subject</p>
+                                        <input type="text" asp-for="Subject" id="subject">
+                                        <p>Message</p>
+                                        <textarea asp-for="Message" cols="15" rows="10"></textarea>
+                                    </div>
+                                </div>
+                                <input type="submit" value="send message" class="btn btn-primary col-4" />
+                            </form>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="blog-sidebar right">
+                    <div class="single-blog-widget mb-50">
+                        <h3>categories</h3>
+                        <ul>
+                            @foreach (Category item in ViewBag.Categories)
+                            {
+                            <li>
+                                <a asp-controller="Course" asp-action="Categories" asp-route-Id="@item.Id">
+                                    @Html.Raw(item.CategoryName) (@Model.Courses.Where(c => c.CategoryId == item.Id).Count())
+                                </a>
+                            </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="single-blog-widget mb-50">
+                        <div class="single-blog-banner">
+                            <a href="blog-details.html" id="blog"><img src="~/img/blog/blog-img.jpg" alt="blog"></a>
+                            <h2>best<br> eductaion<br> theme</h2>
+                        </div>
+                    </div>
+                    <div class="single-blog-widget mb-50">
+                        <h3>latest post</h3>
+                            @foreach (Blog item in ViewBag.Blogs)
+                            {
+                                <div class="single-post mb-30">
+                                    <div class="single-post-img">
+                                        <a href="blog-details.html">
+                                            <img src="~/img/blog/@item.Image" style="height:80px" alt="post">
+                                            <div class="blog-hover">
+                                                <i class="fa fa-link"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="single-post-content">
+                                        <h4><a href="blog-details.html">@Html.Raw(item.Description)</a></h4>
+                                        <p>By Alex  /  June 20, 2017</p>
+                                    </div>
+                                 </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="single-blog-widget">
+                        <h3>tags</h3>
+                        <div class="single-tag">
+                            @foreach (Tag item in ViewBag.Tags)
+                            {
+                                <a href="blog-details.html" class="mr-10 mb-10">@item.TagName</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Blog End -->

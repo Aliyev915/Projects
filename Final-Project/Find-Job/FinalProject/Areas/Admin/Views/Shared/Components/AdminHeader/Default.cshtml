@@ -1,0 +1,85 @@
+﻿@model AppUser
+@{
+    Layout = null;
+}
+
+<div class="navbar">
+    <div class="row justify-content-between w-100">
+        <div class="col-1">
+            <div class="logo">
+                <img src="~/img/logo/black-logo.png" alt="">
+            </div>
+        </div>
+        <div class="col-3 text-center">
+            <div class="user">
+                <img src="~/img/@Model.Image" alt="user">
+                <a href="~/admin/">
+                    Hi, @Model.Fullname
+                    <i class="fas fa-caret-down"></i>
+                </a>
+                <div class="dropdown">
+                    <ul>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">Index</a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="Message" asp-action="Index">Message</a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="Profile" asp-action="Edit">Edit Profile</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Logout" asp-area="">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navbar-responsive">
+    <div class="row justify-content-between w-100">
+        <div class="logo">
+            <img src="~/img/logo/black-logo.png" alt="">
+        </div>
+        <div class="burger-button">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="dropdown-responsive">
+        <ul>
+            <li>
+                <a asp-controller="Home" asp-action="Index">Index</a>
+            </li>
+            <li>
+                <a>Dashboard</a>
+            </li>
+            <li>
+                <a asp-area="Admin" asp-controller="Dashboard" asp-action="Post">Post a Job</a>
+            </li>
+            <li>
+                <a asp-area="Admin" asp-controller="Candidate" asp-action="Index">Manage Candidate</a>
+            </li>
+            <li>
+                <a asp-area="Admin" asp-controller="Job" asp-action="Index">Manage Jobs</a>
+            </li>
+            <li>
+                <a asp-area="Admin" asp-controller="Message" asp-action="Index">Messages</a>
+            </li>
+            <li>
+                <a asp-area="Admin" asp-controller="Blog" asp-action="Index">Manage Blog</a>
+            </li>
+            <li>
+                <a asp-area="Admin" asp-controller="Profile" asp-action="Edit">Edit Profile</a>
+            </li>
+            <li>
+                <a asp-controller="Account" asp-action="Logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</div>

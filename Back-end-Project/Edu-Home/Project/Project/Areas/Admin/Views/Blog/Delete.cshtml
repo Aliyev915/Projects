@@ -1,0 +1,71 @@
+﻿@model Blog
+@using System.Text.RegularExpressions;
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h4 class="card-title">Delete</h4>
+<form class="forms-sample" method="post" id="form" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">About</label>
+                        <input disabled class="form-control exampleInputEmail3" value="@Regex.Replace(Model.About,@"<[^>]*>", "")" />
+                        <span asp-validation-for="@Model.About" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label value="@Model.Description">Description</label>
+                        <input disabled class="form-control exampleInputName1" value="@Regex.Replace(Model.Description,@"<[^>]*>", "")">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Category.CategoryName">Category</label>
+                        <div class="input-group">
+                            <input class="form-control" disabled value="@Regex.Replace(Model.Category.CategoryName,@"<[^>]*>", "")" id="category" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tag.TagName">Tag</label>
+                        <div class="input-group">
+                            <input class="form-control" disabled value="@Regex.Replace(Model.Tag.TagName,@"<[^>]*>", "")" id="category" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h3>Image</h3>
+                        <img src="~/img/blog/@Model.Image" alt="Alternate Text" />
+                    </div>
+                    <input type="submit" class="btn btn-danger mr-2" value="Delete">
+                    <button asp-action="Index" asp-controller="Dashboard" class="btn btn-light">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#form').submit(function (e) {
+                e.preventDefault();
+                    swal({
+                        title: "Are you sure to delete this file?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                swal("Your file has been deleted!", {
+                                    icon: "success",
+                                });
+                                setTimeout(() => { document.querySelector('#form').submit() }, 1000);
+                            }
+                        });
+            })
+        })
+    </script>
+
+
+}

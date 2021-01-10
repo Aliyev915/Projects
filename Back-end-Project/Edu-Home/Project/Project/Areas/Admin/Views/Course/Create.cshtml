@@ -1,0 +1,203 @@
+﻿@model CreateCourseVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4 class="card-title">Create</h4>
+<form class="forms-sample" id="form" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Title</label>
+                        <textarea asp-for="Title" id="editor"></textarea>
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>File upload</label>
+                        <input class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                            <input asp-for="Photo" class="form-control file-upload-info" id="upload" accept="image/*" placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-info" id="btn-upload" type="button">Upload</button>
+                            </span>
+                        </div>
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description">Description</label>
+                        <textarea asp-for="Description" id="editor1"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Categories</label>
+                        <select class="js-example-basic-single form-control">
+                            @foreach (Category item in ViewBag.Categories)
+                            {
+                                <option value="@item.CategoryName">@item.CategoryName</option>
+                            }
+                        </select>
+                        <input type="hidden" class="form-control" id="category" asp-for="Category" />
+                    </div>
+                    <h4 class="card-title">Course Features</h4>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">About</label>
+                        <textarea asp-for="About" id="editor2"></textarea>
+                        <span asp-validation-for="About" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Apply</label>
+                        <textarea asp-for="Apply" id="editor3"></textarea>
+                        <span asp-validation-for="Apply" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Assestements</label>
+                        <textarea asp-for="Assestement" id="editor4"></textarea>
+                        <span asp-validation-for="Assestement" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Certification</label>
+                        <textarea asp-for="Certification" id="editor5"></textarea>
+                        <span asp-validation-for="Certification" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Admin</label>
+                        <select class="js-example-basic-single fullname form-control">
+                            @foreach (AppUser item in ViewBag.Users)
+                            {
+                                <option value="@item.UserName">@item.UserName</option>
+                            }
+                        </select>
+                        <input type="hidden" class="form-control" id="fullname" asp-for="Fullname" />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleinputname1">class duration</label>
+                                <input class="form-control exampleinputname1" asp-for="ClassDuration">
+                                <span asp-validation-for="ClassDuration" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleinputname1">duration</label>
+                                <input class="form-control exampleinputname1" asp-for="Duration">
+                                <span asp-validation-for="Duration" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleinputname1">fee</label>
+                                <input class="form-control exampleinputname1" asp-for="Fee">
+                                <span asp-validation-for="Fee" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleinputname1">skill level</label>
+                                <input class="form-control exampleinputname1" asp-for="SkillLevel">
+                                <span asp-validation-for="SkillLevel" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleinputname1">start time </label>
+                                <input class="form-control exampleinputname1" asp-for="StartTime">
+                                <span asp-validation-for="StartTime" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleinputname1">student </label>
+                                <input class="form-control exampleinputname1" asp-for="Student">
+                                <span asp-validation-for="Student" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-success mr-2" value="Create">
+                    <button class="btn btn-light">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/20.0.0/classic/ckeditor.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor1'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor2'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor3'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor4'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor5'))
+            .catch(error => {
+                console.error(error);
+            });
+        let button = document.querySelector('#btn-upload');
+        button.onclick = function () {
+            $('#upload').click();
+        }
+        $(document).ready(function () {
+            $('#form').submit(function (e) {
+                e.preventDefault();
+                if ($('#upload').val() == '' || $('#editor1').val() == '' || $('#editor2').val() == '' || $('#editor3').val() == '' ||
+                    $('#editor4').val()==''||$('#editor5').val()=='') {
+                    swal({
+                        title: 'All fields must be filled!',
+                        icon: 'warning'
+                    });
+                } else {
+                    swal({
+                        title: "Are you sure to create this course?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                swal("The course has been created!", {
+                                    icon: "success",
+                                });
+                                setTimeout(() => { document.querySelector('#form').submit() }, 2000);
+                            }
+                        });
+                }
+            })
+        })
+    </script>
+}

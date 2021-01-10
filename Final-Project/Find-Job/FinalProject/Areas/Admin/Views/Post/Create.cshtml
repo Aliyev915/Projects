@@ -1,0 +1,112 @@
+﻿@model PostVM
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="right-side">
+    <h4>Post a Job</h4>
+    <div class="post">
+        <div class="title">
+            <h4>Basic Information</h4>
+        </div>
+        <div class="form">
+            <form method="post">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Job Title</label> <br>
+                        <input asp-for="Title" type="text" class="input-text" placeholder="Job Title">
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Deadline</label> <br>
+                        <input asp-for="Deadline" class="input-text">
+                        <span asp-validation-for="Deadline" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label asp-for="Type">Job Type</label> <br>
+                        <select class="js-example-basic-single input-text" asp-for="Type">
+                            @foreach (FinalProject.Models.Type item in ViewBag.Types)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label asp-for="Category">Job Category</label> <br>
+                        <select class="js-example-basic-single input-text" asp-for="Category">
+                            @foreach (Category item in ViewBag.Categories)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label asp-for="Currency">Currency</label> <br>
+                        <select class="js-example-basic-single input-text" asp-for="Currency">
+                            @foreach (Currency item in ViewBag.Currencies)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="">Salary</label> <br>
+                        <input asp-for="Salary" type="number" min="300" step="50" class="input-text" placeholder="Salary">
+                        <span asp-validation-for="Salary" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label asp-for="City">City</label> <br>
+                        <select class="js-example-basic-single input-text" asp-for="City">
+                            @foreach (Location item in ViewBag.Locations)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="">Min Experience</label> <br>
+                        <input asp-for="MinExperience" id="min" min="0" class="input-text" placeholder="Experience">
+                        <span class="text-danger" asp-validation-for="MinExperience"></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="">Max Experience</label> <br>
+                        <input asp-for="MaxExperience" id="max" max="20" class="input-text" placeholder="Experience">
+                        <span class="text-danger" asp-validation-for="MaxExperience"></span>
+                    </div>
+                    <div class="col-lg-12">
+                        <label for="">Demands</label>
+                        <textarea asp-for="Demand" class="input-text" rows="8" id="editor"></textarea>
+                    </div>
+                    <div class="col-lg-12">
+                        <label for="">Job Description</label>
+                        <textarea asp-for="Description" rows="8" placeholder="Detailed Information"></textarea>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <button class="btn-post">Post a Job</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>© 2018 Theme Vessel. Trademarks and brands are the property of their respective owners.</p>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+}

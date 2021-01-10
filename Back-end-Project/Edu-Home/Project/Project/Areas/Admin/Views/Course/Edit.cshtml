@@ -1,0 +1,150 @@
+﻿@model Course
+@using System.Text.RegularExpressions;
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4 class="card-title">Create</h4>
+<form class="forms-sample" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <h3>Image</h3>
+                        <img src="~/img/course/@Model.Image" alt="Alternate Text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Title</label>
+                        <textarea asp-for="Title" id="editor">@Regex.Replace(Model.Title,@"<[^>]*>","")</textarea>
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>File upload</label>
+                        <input value="" class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                            <input value="" asp-for="Photo" class="form-control file-upload-info" id="upload" accept="image/*" placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-info" type="button">Upload</button>
+                            </span>
+                        </div>
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description">Description</label>
+                        <textarea asp-for="Description" id="editor1">@Regex.Replace(Model.Description,@"<[^>]*>","")</textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Categories</label>
+                        <select class="js-example-basic-single form-control">
+                            @foreach (Category item in ViewBag.Categories)
+                            {
+                                <option value="@item.CategoryName">@item.CategoryName</option>
+                            }
+                        </select>
+                        <input type="hidden" class="form-control" id="category" asp-for="Category.CategoryName" />
+                    </div>
+                    <h4 class="card-title">Course Features</h4>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">About</label>
+                        <textarea asp-for="CourseFeatures.About" id="editor2">@Regex.Replace(Model.CourseFeatures.About,@"<[^>]*>","")</textarea>
+                        <span asp-validation-for="@Model.CourseFeatures.About" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Apply</label>
+                        <textarea asp-for="CourseFeatures.Apply" id="editor3">@Regex.Replace(Model.CourseFeatures.Apply,@"<[^>]*>","")</textarea>
+                        <span asp-validation-for="@Model.CourseFeatures.Apply" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Assestements</label>
+                        <textarea asp-for="CourseFeatures.Assestement" id="editor4">@Regex.Replace(Model.CourseFeatures.Assestement,@"<[^>]*>","")</textarea>
+                        <span asp-validation-for="@Model.CourseFeatures.Assestement" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Certification</label>
+                        <textarea asp-for="CourseFeatures.Certification" id="editor5">@Regex.Replace(Model.CourseFeatures.Certification,@"<[^>]*>","")</textarea>
+                        <span asp-validation-for="@Model.CourseFeatures.Certification" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleinputname1">class duration</label>
+                        <input value="@Model.CourseFeatures.ClassDuration" class="form-control exampleinputname1" asp-for="@Model.CourseFeatures.ClassDuration">
+                        <span asp-validation-for="@Model.CourseFeatures.ClassDuration" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleinputname1">duration</label>
+                        <input value="@Model.CourseFeatures.Duration" class="form-control exampleinputname1" asp-for="@Model.CourseFeatures.Duration">
+                        <span asp-validation-for="@Model.CourseFeatures.Duration" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleinputname1">fee</label>
+                        <input value="@Model.CourseFeatures.Fee" class="form-control exampleinputname1" asp-for="@Model.CourseFeatures.Fee">
+                        <span asp-validation-for="@Model.CourseFeatures.Fee" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleinputname1">skill level</label>
+                        <input value="@Model.CourseFeatures.SkillLevel" class="form-control exampleinputname1" asp-for="@Model.CourseFeatures.SkillLevel">
+                        <span asp-validation-for="@Model.CourseFeatures.SkillLevel" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleinputname1">start time </label>
+                        <input value="@Model.CourseFeatures.StartTime" class="form-control exampleinputname1" asp-for="@Model.CourseFeatures.StartTime">
+                        <span asp-validation-for="@Model.CourseFeatures.StartTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleinputname1">student </label>
+                        <input value="@Model.CourseFeatures.Student" class="form-control exampleinputname1" asp-for="@Model.CourseFeatures.Student">
+                        <span asp-validation-for="@Model.CourseFeatures.Student" class="text-danger"></span>
+                    </div>
+
+                    <input value="Update" type="submit" class="btn btn-primary mr-2">
+                    <button class="btn btn-light">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/20.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor1'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor2'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor3'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor4'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor5'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    }

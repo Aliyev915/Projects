@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Event>
+@using System.Text.RegularExpressions;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="row justify-content-around">
+                    <h4 class="card-title">Event Create</h4>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th> Image </th>
+                            <th> Event</th>
+                            <th> About </th>
+                            <th> Speakers </th>
+                            <th> Setting </th>
+                            <th>
+                                <a asp-action="Create" class="btn-success px-4 py-2">
+                                    <i class="fas fa-plus-circle text-white-50"></i>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Event item in Model)
+                        {
+                            <tr>
+                                <td class="py-1">
+                                    <img src="~/img/event/@item.Image" alt="image" />
+                                </td>
+                                <td>
+
+                                    @if (item.Name.Length >= 20)
+                                    {@Regex.Replace(item.Name, @"<[^>]*>", "").Substring(0, 18)}
+                                else
+                                {@Regex.Replace(item.Name, @"<[^>]*>", "")}
+                                </td>
+                                <td>
+                                    @if (item.About.Length < 10)
+                                    {@Regex.Replace(item.Name, @"<[^>]*>", "")}
+                                else
+                                {@Regex.Replace(item.About, @"<[^>]*>", "").Substring(0, 30)}
+                                </td>
+                                <td>
+                                    <select>
+                                        @{ 
+                                            IEnumerable<EventSpeaker> speakers = ViewBag.Speakers;
+                                        }
+                                        @foreach (EventSpeaker speaker in speakers.Where(s=>s.EventId==item.Id))
+                                        {
+                                            <option>@speaker.Speaker.Fullname</option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <a asp-action="Info" asp-route-Id="@item.Id" class="btn-info px-4 py-2">
+                                        <i class="fas fa-info text-white-50"></i>
+                                    </a>
+                                    <a asp-action="Edit" asp-route-Id="@item.Id" class="btn-primary px-4 py-2">
+                                        <i class="fas fa-edit text-white-50"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-Id="@item.Id" class="btn-danger px-4 py-2">
+                                        <i class="fas fa-trash text-white-50"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

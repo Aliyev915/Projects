@@ -1,0 +1,229 @@
+﻿@model HomeVM
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- banner-area -->
+<div class="banner-area">
+    <img src="~/img/banner/banner-2.jpg" alt="banner">
+    <div class="content">
+        <h1>Find your job</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+    </div>
+    <div class="search-area">
+        <form id="search">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 col-sm-8">
+                        <input class="form-control" id="job" placeholder="Job title, Keywords or company name">
+                    </div>
+                    <div class="col-4 location-area">
+                        <div id="location">
+                            <input type="hidden" />
+                            <div>location</div>
+                            <i class="fas fa-caret-down"></i>
+                        </div>
+                        <ul class="selection">
+                            @foreach (Location item in Model.Locations)
+                            {
+                                <li>@item.Name</li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                        <a class="findJob">Find a Job</a>
+                        <a class="search-icon">
+                            <i class="fas fa-search"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="clock">
+        <h2>The time is now</h2>
+        <div class="time">
+            <div>
+                <span class="hour">@DateTime.Now.Hour</span>
+                <span>Hours</span>
+            </div>
+            <div>
+                <span class="minute">@DateTime.Now.Minute</span>
+                <span>Minutes</span>
+            </div>
+            <div>
+                <span class="second">@DateTime.Now.Second</span>
+                <span>Seconds</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- banner-area -->
+<!-- recent jobs start -->
+<div class="recent-jobs">
+    <div class="container">
+        <div class="content">
+            <div class="title">
+                <h2>Recent Jobs</h2>
+            </div>
+            <div class="description">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </div>
+        </div>
+        <div class="job-list">
+            @foreach (Job item in Model.Jobs)
+            {
+                <div class="job-about">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-4">
+                            <div class="company-logo">
+                                <img src="~/img/company-logo/@item.Company.Logo" alt="logo">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-8">
+                            <div class="name">
+                                <h5>@item.Name</h5>
+                            </div>
+                            <div class="add-info">
+                                <div class="row">
+                                    <p><i class="fas fa-briefcase"></i> @item.Category.Name</p>
+                                    <p><i class="fas fa-map-marker-alt"></i>@item.Location.Name</p>
+                                    <p><i class="far fa-clock"></i>@item.Type.Name</p>
+                                </div>
+                            </div>
+                            <div class="deadline">
+                                <p>Deadline: @item.Deadline.ToString("MMMM").Substring(0, 3) @item.Deadline.Day, @item.Deadline.Year</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <input type="hidden" value="@item.Id" />
+                                <div class="favorite">
+                                    @{
+                                        IEnumerable<Bookmark> bookmarks = ViewBag.IsMarked;
+                                    }
+                                    @if (bookmarks != null)
+                                    {
+                                        foreach (Bookmark bookmark in bookmarks)
+                                        {
+                                            if (bookmark.JobId == item.Id)
+                                            {
+                                                <i class="fas fa-heart"></i>
+                                            }
+                                        }
+                                        <i class="far fa-heart"></i>
+                                    }
+                                </div>
+                                <div class="apply">
+                                    <a href="@Url.Action("Apply","Job",new {Id=item.Id })" class="btn-apply">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="browse-job">
+            <a asp-controller="Job" class="btn-browse">Browse All Jobs</a>
+        </div>
+    </div>
+</div>
+<!-- recent jobs end -->
+<!-- statistics start -->
+<div class="statistics">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            @foreach (Statistic item in Model.Statistics)
+            {
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="member">
+                        @Html.Raw(item.Icon)
+                        @if (item.Title == "Members")
+                        {
+                            <h1 class="counter text-white" data-to="@ViewBag.UserCount"></h1>
+                        }
+                        @if (item.Title == "Jobs")
+                        {
+                            <h1 class="counter text-white" data-to="@ViewBag.JobCount"></h1>
+                        }
+                        @if (item.Title == "Resumes")
+                        {
+                            <h1 class="counter text-white" data-to="@ViewBag.ResumeCount"></h1>
+                        }
+                        @if (item.Title == "Companies")
+                        {
+                            <h1 class="counter text-white" data-to="@ViewBag.CompanyCount"></h1>
+                        }
+                        <p class="text-white">@item.Title</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- statistics end -->
+<!-- latest blogs -->
+<div class="blog-area">
+    <div class="container">
+        <div class="content">
+            <div class="title">
+                <h2>Latest Blog</h2>
+            </div>
+            <div class="description">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+        <div class="row owl-carousel owl-theme">
+            @foreach (Blog item in Model.Blogs)
+            {
+                <div class="blog">
+                    <div class="image">
+                        <img src="~/img/blog/@item.Image" alt="">
+                        <div class="date">
+                            <p class="text-white">@item.Time.Day</p>
+                            <p class="text-white">@item.Time.ToString("MMMM").Substring(0, 3)</p>
+                        </div>
+                    </div>
+                    <div class="blog-body">
+                        <div class="title">
+                            <h3><a href="@Url.Action("Detail","Blog",new { slug=item.Slug})">@item.Title</a></h3>
+                        </div>
+                        <div class="features">
+                            <p><i class="fas fa-user"></i> Admin</p>
+                            <p><i class="far fa-comment-dots"></i>@item.Comments.Count()</p>
+                        </div>
+                        <div class="description">
+                            @if (item.Description.Length <= 100)
+                            {
+                                @item.Description
+                            }
+                            else
+                            {
+                                @item.Description.Substring(0, 100)
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="icons left">
+            <i class="fas fa-angle-left"></i>
+        </div>
+        <div class="icons right">
+            <i class="fas fa-angle-right"></i>
+        </div>
+    </div>
+</div>
+<!-- latest blogs -->
+
+@section Scripts{
+    <script src="~/js/search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+}  

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Job>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="right-side">
+    <h4>Manage Job</h4>
+    <div class="manage">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Job Title</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Experience</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Setting</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Job item in Model)
+	            {
+                <tr>
+                    <th scope="row">
+                        <div class="job">
+                            <div class="job-info">
+                                <div class="name">
+                                    <h4>@item.Name</h4>
+                                </div>
+                                <div class="info">
+                                    <span><i class="fas fa-briefcase"></i> @item.Category.Name</span>
+                                    <span><i class="fas fa-map-marker-alt"></i> @item.Location.Name</span>
+                                    <span><i class="far fa-clock"></i>@item.Type.Name</span>
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+                    <td>@item.Deadline.ToString("dd MMMM, yyyy")</td>
+                    <td>@item.Experience</td>
+                    <td>@item.Salary</td>
+                    <td>
+                        <a asp-controller="Job" asp-action="Edit" asp-route-Id="@item.Id">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a asp-controller="Job" asp-action="Delete" asp-route-Id="@item.Id">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+	            }
+            </tbody>
+        </table>
+    </div>
+    <div class="copyright">
+        <p>© 2018 Theme Vessel. Trademarks and brands are the property of their respective owners.</p>
+    </div>
+</div>

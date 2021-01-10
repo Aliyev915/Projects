@@ -1,0 +1,93 @@
+﻿@model RegisterVM
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/Admin/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/Admin/vendors/iconfonts/ionicons/css/ionicons.css">
+    <link rel="stylesheet" href="~/Admin/vendors/iconfonts/typicons/src/font/typicons.css">
+    <link rel="stylesheet" href="~/Admin/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/Admin/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/Admin/vendors/css/vendor.bundle.addons.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="~/Admin/vendors/icheck/skins/all.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/Admin/css/shared/style.css">
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="~/Admin/css/demo_1/style.css">
+    <!-- End Layout styles -->
+    <link rel="shortcut icon" href="~/Admin/images/favicon.png" />
+</head>
+<body>
+    <div class="container-scroller">
+        <div class="row justify-content-center" style="margin-top:100px;">
+            <div class="col-md-3 d-flex align-items-stretch grid-margin">
+                <div class="row flex-grow">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="text-center">Register</h4>
+                                <form class="forms-sample" method="post">
+                                    <div class="form-group">
+                                        <label asp-for="Fullname">Fullname</label>
+                                        <input asp-for="Fullname" class="form-control" placeholder="Password">
+                                        <span asp-validation-for="Fullname" class="text-danger"></span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Username">Username</label>
+                                        <input asp-for="Username" class="form-control" placeholder="Username">
+                                        <span asp-validation-for="Username" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Email">Email address</label>
+                                        <input asp-for="Email" class="form-control" placeholder="Enter email">
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Password">Password</label>
+                                        <input asp-for="Password" class="form-control"  placeholder="Password">
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="CheckPassword">Repeat Password</label>
+                                        <input asp-for="CheckPassword" class="form-control"  placeholder="Repeat Password">
+                                        <span asp-validation-for="CheckPassword" class="text-danger"></span>
+                                    </div>
+                                    <button type="submit" class="btn btn-success mr-2">Register</button>
+                                    <p>Have you an Account <a asp-action="Login">Login</a></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/Admin/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/Admin/vendors/js/vendor.bundle.addons.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="~/Admin/js/shared/off-canvas.js"></script>
+    <script src="~/Admin/js/shared/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <!-- End custom js for this page-->
+</body>
+</html>

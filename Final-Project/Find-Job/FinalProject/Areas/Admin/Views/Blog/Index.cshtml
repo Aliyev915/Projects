@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Blog>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="right-side">
+    <h4 style="float:left;">Manage Blog</h4>
+    <a style="float:right;" asp-controller="Blog" asp-action="Create" class="btn btn-success">
+        <i class="fas fa-plus"></i>
+    </a>
+    <div class="manage">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Datetime</th>
+                    <th scope="col">Settings</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Blog item in Model)
+                {
+                    <tr>
+                        <th scope="row">
+                            <div class="image">
+                                <img src="~/img/blog/@item.Image" alt="">
+                            </div>
+                        </th>
+                        <td>@item.Title</td>
+                        <td>@item.Time.ToString("dd MMMM yyyy")</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-Id="@item.Id">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-Id="@item.Id">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="copyright">
+        <p>© 2018 Theme Vessel. Trademarks and brands are the property of their respective owners.</p>
+    </div>
+</div>

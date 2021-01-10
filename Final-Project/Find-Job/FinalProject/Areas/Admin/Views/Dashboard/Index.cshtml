@@ -1,0 +1,113 @@
+﻿@model IEnumerable<AppUser>
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <div class="right-side">
+        <h4>Hello, Sadig Aliyev</h4>
+        <div class="statistic">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="listing bg-success">
+                        <div class="count">
+                            <h4>@ViewBag.Users</h4>
+                            <p>Users</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="view bg-warning">
+                        <div class="count">
+                            <h4>@ViewBag.Jobs</h4>
+                            <p>Jobs</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="review bg-primary">
+                        <div class="count">
+                            <h4>@ViewBag.Candidates</h4>
+                            <p>Candidates</p>
+                        </div>
+                        <div class="icon">
+                            <i class="far fa-comments"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="bookmark bg-dark">
+                        <div class="count">
+                            <h4>@ViewBag.Bookmarks</h4>
+                            <p>Bookmarked</p>
+                        </div>
+                        <div class="icon">
+                            <i class="far fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user-account">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="users">
+                        <div class="user-nav">
+                            <div class="row justify-content-between">
+                                <h5>New Users</h5>
+                                <div class="time">
+                                    <span class="actived" data-id="today">Today</span>
+                                    <span data-id="month">Month</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="userList" data-id="today">
+                            @foreach (AppUser item in Model.Where(u=>u.RegisterDate.Day==DateTime.Today.Day))
+                            {
+                                <div class="row mb-4">
+                                    <div class="col-2">
+                                        <div class="image">
+                                            <img src="../img/@item.Image" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="user-info">
+                                            <h5>@item.Fullname</h5>
+                                            <span>@item.Email</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="userList d-none" data-id="month">
+
+                            @foreach (AppUser item in Model.Where(u => u.RegisterDate.Month == DateTime.Today.Month))
+                            {
+                                <div class="row mb-4">
+                                    <div class="col-2">
+                                        <div class="image">
+                                            <img src="../img/@item.Image" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="user-info">
+                                            <h5>@item.Fullname</h5>
+                                            <span>@item.Email</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2018 Theme Vessel. Trademarks and brands are the property of their respective owners.</p>
+        </div>
+    </div>

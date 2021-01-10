@@ -1,0 +1,203 @@
+﻿@model CandidateVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/admin/css/style.css" rel="stylesheet" />
+    <link href="~/img/favicon.jpg" rel="shortcut icon" />
+    <title>Create</title>
+</head>
+<body>
+    <div class="container">
+        <div class="right-side">
+            <h4>Post a Resume</h4>
+            <div class="post">
+                <div class="title">
+                    <h4>Basic Information</h4>
+                </div>
+                <div class="form">
+                    <form method="post">
+                        <div class="general-info">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label>Name</label> <br>
+                                    <input asp-for="Name" class="input-text" placeholder="Name">
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Lastname</label> <br>
+                                    <input asp-for="Lastname" class="input-text" placeholder="Lastname">
+                                    <span asp-validation-for="Lastname" class="text-danger"></span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Speciality</label> <br>
+                                    <input asp-for="Profession" class="input-text" placeholder="Speciality">
+                                    <span asp-validation-for="Profession" class="text-danger"></span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Lastname</label> <br>
+                                    <input asp-for="Salary" min="300" step="50" class="input-text" placeholder="Salary">
+                                    <span asp-validation-for="Salary" class="text-danger"></span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label asp-for="Location">Location</label> <br>
+                                    <select class="js-example-basic-single input-text" asp-for="Location">
+                                        @foreach (Location item in ViewBag.Location)
+                                        {
+                                            <option value="@item.Name">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label asp-for="Type">Location</label> <br>
+                                    <select class="js-example-basic-single input-text" asp-for="Type">
+                                        @foreach (FinalProject.Models.Type item in ViewBag.Type)
+                                        {
+                                            <option value="@item.Name">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-lg-12">
+                                    <label for="">About</label>
+                                    <textarea asp-for="About" rows="8" placeholder="Detailed Information"></textarea>
+                                </div>
+                            </div>
+                            <div class="converter">
+                                <div class="next-section">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-experience" style="display:none">
+                            <div class="title">
+                                <h4>Experience</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label>Company</label> <br>
+                                    <input asp-for="Company" class="input-text" placeholder="Company">
+                                    <span asp-validation-for="Company" class="text-danger"></span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Speciality</label> <br>
+                                    <input asp-for="ExpSpeciality" class="input-text" placeholder="Speciality">
+                                    <span asp-validation-for="ExpSpeciality" class="text-danger"></span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Adress</label> <br>
+                                    <input asp-for="ExperienceYear" class="input-text" placeholder="Experience Year">
+                                    <span asp-validation-for="ExperienceYear" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="converter">
+                                <div class="prev-section">
+                                    <i class="fas fa-arrow-left"></i>
+                                </div>
+                                <div class="next-section">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-education" style="display:none">
+                            <div class="title">
+                                <h4>Education</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label>University</label> <br>
+                                    <input asp-for="University" class="input-text" placeholder="University">
+                                    <span asp-validation-for="University" class="text-danger"></span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Speciality</label> <br>
+                                    <input asp-for="EduSpeciality" class="input-text" placeholder="Speciality">
+                                    <span asp-validation-for="EduSpeciality" class="text-danger"></span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Education Year</label> <br>
+                                    <input asp-for="EducationYear" class="input-text" placeholder="Education Year">
+                                    <span asp-validation-for="EducationYear" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="converter">
+                                <div class="prev-section">
+                                    <i class="fas fa-arrow-left"></i>
+                                </div>
+                                <div class="next-section">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-skills" style="display:none">
+                            <div class="title">
+                                <h4>Skills</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-between">
+                                        <label>Speciality</label>
+                                        <div class="value"></div>
+                                    </div>
+                                    <input asp-for="Speciality" type="range" class="input-text" placeholder="University">
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-between">
+                                        <label>Leadership</label>
+                                        <div class="value"></div>
+                                    </div>
+                                    <input asp-for="LeaderShip" type="range" class="input-text" placeholder="Speciality">
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-between">
+                                        <label>Langugage</label>
+                                        <div class="value"></div>
+                                    </div>
+                                    <input asp-for="Langugage" type="range" class="input-text" placeholder="Education Year">
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-between">
+                                        <label>Community</label>
+                                        <div class="value"></div>
+                                    </div>
+                                    <input asp-for="Community" type="range" class="input-text" placeholder="Education Year">
+                                    <span asp-validation-for="Community" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="converter">
+                                <div class="prev-section">
+                                    <i class="fas fa-arrow-left"></i>
+                                </div>
+                            <button class="btn-post">Deploy a Resume</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2018 Theme Vessel. Trademarks and brands are the property of their respective owners.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://kit.fontawesome.com/4a0d6e395d.js" crossorigin="anonymous"></script>
+    <script src="~/admin/js/script.js"></script>
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+</body>
+</html>

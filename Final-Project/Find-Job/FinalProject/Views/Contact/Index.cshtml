@@ -1,0 +1,119 @@
+﻿@model MessageVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<!-- contact-area start  -->
+<div class="contact-area">
+    <div class="title">
+        <h2>Contact Us</h2>
+    </div>
+    <div class="description">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+    <div class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="contact-box">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-title">
+                            <h4>Office Adress</h4>
+                        </div>
+                        <div class="contact-text">
+                            <p>@Model.Bio.Address</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="contact-box">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-title">
+                            <h4>Phone</h4>
+                        </div>
+                        <div class="contact-text">
+                            <p>@Model.Bio.Phone</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="contact-box">
+                        <div class="contact-icon">
+                            <i class="far fa-envelope"></i>
+                        </div>
+                        <div class="contact-title">
+                            <h4>Email Adress</h4>
+                        </div>
+                        <div class="contact-text">
+                            <p>@Model.Bio.Email</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="contact-box">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="contact-title">
+                            <h4>Web</h4>
+                        </div>
+                        <div class="contact-text">
+                            <p>@Model.Bio.Web</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <textarea placeholder="Write message" rows="10" asp-for="Text" class="form-control"></textarea>
+                    <button class="btn-send">Send Message</button>
+                </div>
+                <div class="col-lg-4">
+                    <div class="job-info">
+                        <h5>Opening Hours</h5>
+                            <ul>
+                                <li>
+                                    <strong>Sunday</strong>
+                                    <span>Closed</span>
+                                </li>
+                                <li>
+                                    <strong>Monday</strong>
+                                    <span>10AM-8PM</span>
+                                </li>
+                                <li>
+                                    <strong>Tuesday</strong>
+                                    <span>10AM-8PM</span>
+                                </li>
+                                <li>
+                                    <strong>Wednesday</strong>
+                                    <span>10AM-8PM</span>
+                                </li>
+                                <li>
+                                    <strong>Thrusday</strong>
+                                    <span>10AM-8PM</span>
+                                </li>
+                                <li>
+                                    <strong>Friday</strong>
+                                    <span>10AM-8PM</span>
+                                </li>
+                                <li>
+                                    <strong>Saturday</strong>
+                                    <span>10AM-8PM</span>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- contact-area end  -->

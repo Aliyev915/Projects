@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/admin/css/style.css">
+    <link rel="shortcut icon" href="~/img/adminfavicon.png" type="image/x-icon">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        @await  Component.InvokeAsync("AdminHeader")
+    </header>
+    <!-- header -->
+
+    <div class="main">
+        @await Component.InvokeAsync("Sidebar")
+        @RenderBody()
+    </div>
+    <!-- back to top -->
+    <div class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+    <!-- back to top -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/4a0d6e395d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="~/admin/js/script.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

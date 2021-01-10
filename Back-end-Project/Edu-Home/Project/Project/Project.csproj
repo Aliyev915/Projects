@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200706150423_ConnectionBlogAndCategoryTable.cs" />
+    <Compile Remove="Migrations\20200706150423_ConnectionBlogAndCategoryTable.Designer.cs" />
+    <Compile Remove="Migrations\20200706184620_OK.cs" />
+    <Compile Remove="Migrations\20200706184620_OK.Designer.cs" />
+    <Compile Remove="Migrations\20200707052147_CourseFeatureCreate.cs" />
+    <Compile Remove="Migrations\20200707052147_CourseFeatureCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200707060227_CreateSpeakerTable.cs" />
+    <Compile Remove="Migrations\20200707060227_CreateSpeakerTable.Designer.cs" />
+    <Compile Remove="Migrations\20200707110124_AddColumnToBlogTable.cs" />
+    <Compile Remove="Migrations\20200707110124_AddColumnToBlogTable.Designer.cs" />
+    <Compile Remove="Migrations\20200714125620_RemoveColumnFromSettingTable.cs" />
+    <Compile Remove="Migrations\20200714125620_RemoveColumnFromSettingTable.Designer.cs" />
+    <Compile Remove="Migrations\20200714130040_RemoveColumnFromSettingTable.cs" />
+    <Compile Remove="Migrations\20200714130040_RemoveColumnFromSettingTable.Designer.cs" />
+    <Compile Remove="Migrations\20200716123134_CourseAndUserRelation.cs" />
+    <Compile Remove="Migrations\20200716123134_CourseAndUserRelation.Designer.cs" />
+    <Compile Remove="Migrations\20200716124647_CourseAndUserRelation.cs" />
+    <Compile Remove="Migrations\20200716124647_CourseAndUserRelation.Designer.cs" />
+    <Compile Remove="Migrations\20200716134050_CourseAndUserRelation.cs" />
+    <Compile Remove="Migrations\20200716134050_CourseAndUserRelation.Designer.cs" />
+    <Compile Remove="Migrations\20200716134838_RelationCourseAndUserTable.cs" />
+    <Compile Remove="Migrations\20200716134838_RelationCourseAndUserTable.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+  </ItemGroup>
+
+</Project>

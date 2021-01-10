@@ -1,0 +1,117 @@
+﻿@model Teacher
+@{
+    ViewData["Title"] = "Info";
+}
+
+
+<h4 class="card-title">Create</h4>
+<form class="forms-sample" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Name</label>
+                        <input rows="5" disabled class="form-control exampleInputEmail3" value="@Model.Name" />
+                        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label value="@Model.Profession">Profession</label>
+                        <input disabled class="form-control exampleInputName1" value="@Model.Profession">
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Skill.Communication">Communication</label>
+                                <div class="input-group">
+                                    <input class="form-control" disabled value="@Model.Skill.Communication" id="category" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Skill.Design">Design</label>
+                                <div class="input-group">
+                                    <input class="form-control" disabled value="@Model.Skill.Design" id="category" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Skill.Development">Development</label>
+                                <div class="input-group">
+                                    <input class="form-control" disabled value="@Model.Skill.Development" id="category" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Skill.Innovation">Innovation</label>
+                                <div class="input-group">
+                                    <input class="form-control" disabled value="@Model.Skill.Innovation" id="category" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Skill.Language">Language</label>
+                                <div class="input-group">
+                                    <input class="form-control" disabled value="@Model.Skill.Language" id="category" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Skill.TeamLeader">Team Leader</label>
+                                <div class="input-group">
+                                    <input class="form-control" disabled value="@Model.Skill.TeamLeader" id="category" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h3>Image</h3>
+                        <img src="~/img/teacher/@Model.Image" alt="Alternate Text" />
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label value="@Model.TeacherInfo.Degree">Degree</label>
+                        <input disabled class="form-control exampleInputName1" value="@Model.TeacherInfo.Degree">
+                    </div>
+                    <div class="form-group">
+                        <label value="@Model.TeacherInfo.Email">Email</label>
+                        <input disabled class="form-control exampleInputName1" value="@Model.TeacherInfo.Email">
+                    </div>
+                    <div class="form-group">
+                        <label value="@Model.TeacherInfo.Experience">Experience</label>
+                        <input disabled class="form-control exampleInputName1" value="@Model.TeacherInfo.Experience">
+                    </div>
+                    <div class="form-group">
+                        <label value="@Model.TeacherInfo.Faculty">Faculty</label>
+                        <input disabled class="form-control exampleInputName1" value="@Model.TeacherInfo.Faculty">
+                    </div>
+                    <div class="form-group">
+                        <label value="@Model.TeacherInfo.Hobby">Hobby</label>
+                        <input disabled class="form-control exampleInputName1" value="@Model.TeacherInfo.Hobby">
+                    </div>
+                    <div class="form-group">
+                        <label value="@Model.TeacherInfo.Phone">Phone</label>
+                        <input disabled class="form-control exampleInputName1" value="@Model.TeacherInfo.Phone">
+                    </div>
+                    <div class="form-group">
+                        <label value="@Model.TeacherInfo.Skype">Skype</label>
+                        <input disabled class="form-control exampleInputName1" value="@Model.TeacherInfo.Skype">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

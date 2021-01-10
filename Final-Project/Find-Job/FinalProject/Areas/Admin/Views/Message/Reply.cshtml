@@ -1,0 +1,21 @@
+﻿@model MessageVM
+@{
+    ViewData["Title"] = "Reply";
+}
+    <div class="right-side">
+        <div class="form">
+            <form method="post">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input asp-for="Name" value="@Model.Name" readonly class="input-text" placeholder="Name">
+                    </div>
+                    <div class="col-lg-12">
+                        <textarea rows="5" class="input-text" asp-for="Text"></textarea>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <button class="btn-post">Reply Message</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>

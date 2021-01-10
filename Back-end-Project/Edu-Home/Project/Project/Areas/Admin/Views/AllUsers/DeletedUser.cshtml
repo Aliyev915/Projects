@@ -1,0 +1,19 @@
+﻿@model List<UserVM>
+@{
+    ViewData["Title"] = "DeletedUser";
+}
+<div class="row">
+
+    @foreach (UserVM item in Model)
+    {
+        <ul style="list-style-type:none" class="mr-3">
+
+            <li>Username: @item.Username</li>
+            <li>Email: @item.Email</li>
+            <li>Fullname: @item.Fullname</li>
+
+        </ul>
+    }
+</div>
+<a asp-action="Index" class="btn btn-dark">Go Back</a>
+

@@ -1,0 +1,126 @@
+﻿@model BlogVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- Blog Start -->
+<div class="blog-area pt-150 pb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    @foreach (Blog item in Model.Blogs.Take(6))
+                    {
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="single-blog mb-60">
+                                <div class="blog-img">
+                                    <a asp-controller="Blog" asp-action="Details" asp-route-Id="@item.Id">
+                                        <img src="~/img/blog/@item.Image" alt="blog">
+                                    </a>
+                                    <div class="blog-hover">
+                                        <i class="fa fa-link"></i>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-top">
+                                        <p>
+                                            By @item.Author  /  @item.Date.ToString("dd, MMMM yyyy")  /
+                                            <i class="fa fa-comments-o"></i>
+                                            @{
+                                                IEnumerable<Reply> replies = ViewBag.Replies;
+                                              }
+                                            @replies.Where(r=>r.BlogId==item.Id).Count()
+                                        </p>
+                                    </div>
+                                    <div class="blog-bottom">
+                                        <h2><a asp-controller="Blog" asp-action="Details" asp-route-Id="@item.Id">@Html.Raw(item.Description)</a></h2>
+                                        <a asp-controller="Blog" asp-action="Details" asp-route-Id="@item.Id">read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    <div class="col-md-12">
+                        <div class="pagination">
+                            <ul>
+                                @for (int i = 1; i <= Math.Ceiling((decimal)ViewBag.BlogCount / 6); i++)
+                                {
+                                    if (i == 1)
+                                    {
+                                        <li><a asp-action="Index" class="active" asp-route-Id="@i">@i</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a asp-action="Index" asp-route-Id="@i">@i</a></li>
+                                    }
+
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="blog-sidebar right">
+                    <div class="single-blog-widget mb-50">
+                        <h3>categories</h3>
+                        <ul>
+                            @foreach (Category item in Model.Categories)
+                            {
+                                <li>
+                                    <a asp-controller="Blog" asp-action="Categories" asp-route-Id="@item.Id">
+                                        @{
+                                            IEnumerable<Blog> Blogs = ViewBag.Blogs;
+                                        }
+                                        @Html.Raw(item.CategoryName) (@Blogs.Where(b => b.CategoryId == item.Id).Count())
+                                    </a>
+                                    <input type="hidden" value="@item.Id" id="DataId"/>
+                                </li>
+
+                            }
+                        </ul>
+                    </div>
+                    <div class="single-blog-widget mb-50">
+                        <div class="single-blog-banner">
+                            <a href="blog-details.html" id="blog"><img src="~/img/blog/blog-img.jpg" alt="blog"></a>
+                            <h2>best<br> eductaion<br> theme</h2>
+                        </div>
+                    </div>
+                    <div class="single-blog-widget mb-50">
+                        <h3>latest post</h3>
+                        @foreach (Blog item in Model.Blogs.TakeLast(3))
+                        {
+                            <div class="single-post mb-30">
+                                <div class="single-post-img">
+                                    <a href="blog-details.html">
+                                        <img src="~/img/blog/@item.Image" style="height:80px" alt="post">
+                                        <div class="blog-hover">
+                                            <i class="fa fa-link"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="single-post-content">
+                                    <h4><a href="blog-details.html">@Html.Raw(item.Description)</a></h4>
+                                    <p>By Alex  /  June 20, 2017</p>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                    <div class="single-blog-widget">
+                        <h3>tags</h3>
+                        <div class="single-tag">
+                            @foreach (Tag item in Model.Tags)
+                            {
+                                <a href="blog-details.html" class="mr-10 mb-10">@item.TagName</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog End -->

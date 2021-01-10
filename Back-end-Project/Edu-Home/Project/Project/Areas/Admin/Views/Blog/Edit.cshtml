@@ -1,0 +1,94 @@
+﻿@model Blog
+@using System.Text.RegularExpressions;
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4 class="card-title">Create</h4>
+<form class="forms-sample" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <h3>Image</h3>
+                        <img src="~/img/blog/@Model.Image" alt="Alternate Text" />
+                    </div>
+                    <div class="form-group">
+                        <label>File upload</label>
+                        <input class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                            <input asp-for="Photo" class="form-control file-upload-info" id="upload" accept="image/*" placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-info" type="button">Upload</button>
+                            </span>
+                        </div>
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea asp-for="Description" id="editor">{@Regex.Replace(Model.Description, @"<[^>]*>", "")}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Time</label>
+                        <input class="form-control" asp-for="Date" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>About</label>
+                        <textarea asp-for="About" id="editor1">{@Regex.Replace(Model.About, @"<[^>]*>", "")}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Tags</label>
+                        <select class="js-example-basic-single tag form-control" asp-for="Tag.TagName">
+                            @foreach (Tag item in ViewBag.Tags)
+                            {
+                                <option value="@item.TagName">@item.TagName</option>
+                            }
+                        </select>
+                        <input type="hidden" class="form-control" id="tag" asp-for="Tag" />
+                    </div>
+                    <div class="form-group">
+                        <label>Categories</label>
+                        <select class="js-example-basic-single form-control" asp-for="Category.CategoryName">
+                            @foreach (Category item in ViewBag.Categories)
+                            {
+                                <option value="@item.CategoryName">@item.CategoryName</option>
+                            }
+                        </select>
+                        <input type="hidden" class="form-control" id="category" asp-for="Category" />
+                    </div>
+                    <div class="form-group">
+                        <label>Author</label>
+                        <input asp-for="Author" class="form-control"/>
+                    </div>
+                    <input type="submit" class="btn btn-primary mr-2" value="Update">
+                    <button class="btn btn-light">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/20.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor1'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}
+
+
+

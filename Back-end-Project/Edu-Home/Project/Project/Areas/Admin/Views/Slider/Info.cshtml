@@ -1,0 +1,13 @@
+﻿@model Slider
+@{
+    ViewData["Title"] = "Info";
+}
+
+<div class="row">
+     <a asp-action="Index" class="btn-dark">
+         <i class="fas fa-arrow-left" style="font-size:20px"></i>
+     </a>
+</div>
+<div class="row">
+    <img src="~/img/slider/@Model.Image" alt="@Model.Image" width="400" />
+</div>

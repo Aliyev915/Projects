@@ -1,0 +1,139 @@
+﻿@model CreateEventVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4 class="card-title">Create</h4>
+<form class="forms-sample" id="form" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Title</label>
+                        <textarea asp-for="EventName" id="editor"></textarea>
+                        <span asp-validation-for="@Model.EventName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>About</label>
+                        <textarea asp-for="About" id="editor1"></textarea>
+                        <span asp-validation-for="@Model.About" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input rows="5" class="form-control exampleInputEmail3" asp-for="Time" />
+                        <span asp-validation-for="@Model.Time" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Categories</label>
+                        <select class="js-example-basic-single form-control">
+                            @foreach (Category item in ViewBag.Categories)
+                            {
+                                <option value="@item.CategoryName">@item.CategoryName</option>
+                            }
+                        </select>
+                        <input type="hidden" class="form-control" id="category" asp-for="Category" />
+                    </div>
+                    <div class="form-group">
+                        <label>Place</label>
+                        <input rows="5" class="form-control exampleInputEmail3" asp-for="Place" />
+                        <span asp-validation-for="@Model.Place" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="exampleInputName1">Event Starts:</label>
+                                <input class="form-control exampleInputName1" asp-for="StartTime">
+                                <span asp-validation-for="@Model.StartTime" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="exampleInputName1">Event Ends:</label>
+                                <input class="form-control exampleInputName1" asp-for="EndTime">
+                                <span asp-validation-for="@Model.EndTime" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>File upload</label>
+                        <input class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                            <input asp-for="Photo" class="form-control file-upload-info" id="upload" accept="image/*" placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-info" id="btn-upload" type="button">Upload</button>
+                            </span>
+                        </div>
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Speakers</label>
+                        <select class="js-example-basic-multiple form-control" name="states[]" multiple="multiple">
+                            @foreach (Speaker item in ViewBag.Speakers)
+                            {
+                                <option value="@item.Fullname">@item.Fullname</option>
+                            }
+                        </select>
+                        <input type="hidden" asp-for="Speaker" class="form-control" id="speakers" />
+                    </div>
+                    <input type="submit" class="btn btn-success mr-2" value="Create">
+                    <button class="btn btn-light">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/20.0.0/classic/ckeditor.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor1'))
+            .catch(error => {
+                console.error(error);
+            });
+
+        let button = document.querySelector('#btn-upload');
+        button.onclick = function () {
+            $('#upload').click();
+        }
+        $(document).ready(function () {
+            $('#form').submit(function (e) {
+                e.preventDefault();
+                if ($('#upload').val() == '' || $('#editor').val == '' || $('#editor1').val == '') {
+                    swal({
+                        title: 'All Fields must be filled!',
+                        icon: 'warning'
+                    });
+                } else {
+                    swal({
+                        title: "Are you sure to create this event?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                swal("The event has been created!", {
+                                    icon: "success",
+                                });
+                                setTimeout(() => { document.querySelector('#form').submit() }, 2000);
+                            }
+                        });
+                }
+            })
+        })
+    </script>
+}

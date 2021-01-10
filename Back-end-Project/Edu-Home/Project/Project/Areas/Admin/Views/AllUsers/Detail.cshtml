@@ -1,0 +1,14 @@
+﻿@model UserVM
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<ul style="list-style-type:none">
+    <li>Username: @Model.Username</li>
+    <li>Email: @Model.Email</li>
+    <li>Fullname: @Model.Fullname</li>
+    <li>Role: @Model.Role</li>
+</ul>
+
+<a asp-action="Index" class="btn btn-dark">Go Back</a>
+

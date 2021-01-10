@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Candidate>
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="right-side">
+    <h4>Manage Candidate</h4>
+    <div class="manage">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Candidate</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Wiews</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Candidate candidate in Model)
+                {
+                    <tr>
+                        <th scope="row">
+                            <div class="candidate">
+                                <div class="image">
+                                    <img src="~/img/avatar/@candidate.Image" alt="@candidate.Image">
+                                </div>
+                                <div class="candidate-info">
+                                    <div class="name">
+                                        <h4>@candidate.Fullname</h4>
+                                    </div>
+                                    <div class="info">
+                                        <span><i class="fas fa-check"></i> @candidate.Profession</span>
+                                        <span><i class="fas fa-map-marker-alt"></i> @candidate.Location.Name</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                        <td>Jan 31, 2019</td>
+                        <td>27</td>
+                        <td>Active</td>
+                        <td>
+                            <a href="">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="copyright">
+        <p>© 2018 Theme Vessel. Trademarks and brands are the property of their respective owners.</p>
+    </div>
+</div>
