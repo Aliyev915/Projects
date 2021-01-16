@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Product>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shop</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/Admin/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/Admin/assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="~/Admin/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/Admin/assets/vendors/jvectormap/jquery-jvectormap.css">
+    <!-- End plugin css for this page -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="~/Admin/assets/css/demo/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="~/Admin/assets/images/favicon.png" />
+</head>
+<body>
+    <div class="page-wrapper mdc-toolbar-fixed-adjust">
+        <main class="content-wrapper">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    @if (ViewBag.Basket != null)
+                    {
+                        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+                            <div class="mdc-card p-0">
+                                <h3 class="card-title card-padding pb-5 text-center">Flowers in basket</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Name</th>
+                                                <th>Count</th>
+                                                <th>Price</th>
+                                                <th>Settings</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (BasketVM product in ViewBag.Basket)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <img width="100" height="100" src="~/img/@product.Image" />
+                                                    </td>
+                                                    <td>@product.Name</td>
+                                                    <td>@product.Count</td>
+                                                    <td>@product.Price</td>
+                                                    <td>
+                                                        <a asp-action="Buy" asp-route-Id="@product.Id" class="mdc-button filled-button--warning">
+                                                            Buy
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+                        <div class="mdc-card p-0">
+                            <h3 class="card-title card-padding pb-5 text-center">Flowers</h3>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th>Category</th>
+                                            <th>Price</th>
+                                            <th>Settings</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (Product product in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <img width="100" height="100" src="~/img/@product.Image" />
+                                                </td>
+                                                <td>@product.Name</td>
+                                                <td>@product.Category.Name</td>
+                                                <td>@product.Price</td>
+                                                <td>
+                                                    <a asp-action="Buy" asp-route-Id="@product.Id" class="mdc-button filled-button--warning">
+                                                        Buy
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- partial:../../partials/_footer.html -->
+        <!-- partial -->
+    </div>
+
+
+
+    <script src="~/Admin/assets/js/preloader.js"></script>
+    <!-- plugins:js -->
+    <script src="~/Admin/assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <script src="~/Admin/assets/vendors/chartjs/Chart.min.js"></script>
+    <script src="~/Admin/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="~/Admin/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="~/Admin/assets/js/material.js"></script>
+    <script src="~/Admin/assets/js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="~/Admin/assets/js/dashboard.js"></script>
+    <!-- End custom js for this page-->
+</body>
+</html>

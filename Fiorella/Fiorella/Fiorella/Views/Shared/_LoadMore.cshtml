@@ -1,0 +1,23 @@
+﻿@model HomeVM
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@foreach (Product product in Model.Products)
+ {
+    <div class="col-lg-3 col-md-6">
+        <div class="item" data-id="@product.Category.Name">
+            <img src="~/img/@product.Image" alt="">
+            <p class="text-dark">@product.Name</p>
+            <span class="addtocart" style="cursor:pointer">
+                <a asp-controller="Home" asp-action="AddToCard" asp-route-Id="@product.Id">Add To Cart</a>
+            </span>
+            <div class="text-muted price">
+                $
+                <span class="value">@product.Price</span>
+            </div>
+        </div>
+    </div>
+}

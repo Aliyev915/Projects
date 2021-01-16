@@ -1,0 +1,53 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <div class="main-wrapper mdc-drawer-app-content">
+        <!-- partial:../../partials/_navbar.html -->
+        <div class="page-wrapper mdc-toolbar-fixed-adjust">
+            <main class="content-wrapper">
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell--span-12">
+                            <div class="mdc-card">
+                                <h6 class="card-title">Delete Flower</h6>
+                                <div class="template-demo">
+                                    <form method="post" enctype="multipart/form-data"> 
+                                        <img height="300" width="300" src="~/img/@Model.Image" alt="Alternate Text" />
+                                        <div class="mdc-layout-grid__inner">
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field">
+                                                    <input disabled asp-for="Name" class="mdc-text-field__input" id="text-field-hero-input">
+                                                    <div class="mdc-line-ripple"></div>
+                                                    <label for="text-field-hero-input" class="mdc-floating-label">Name</label>
+                                                </div>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field">
+                                                    <input disabled asp-for="Category.Name" class="mdc-text-field__input" id="text-field-hero-input">
+                                                    <div class="mdc-line-ripple"></div>
+                                                    <label for="text-field-hero-input" class="mdc-floating-label">Category</label>
+                                                </div>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field">
+                                                    <input disabled asp-for="Price" min="50" step="0.01" class="mdc-text-field__input" id="text-field-hero-input">
+                                                    <div class="mdc-line-ripple"></div>
+                                                    <label for="text-field-hero-input" class="mdc-floating-label">Price</label>
+                                                </div>
+                                            </div>
+                                            <button class="mdc-button filled-button--secondary">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>

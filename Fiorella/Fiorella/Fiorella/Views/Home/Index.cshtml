@@ -1,0 +1,189 @@
+﻿@model HomeVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <main>
+        <!-- Slider -->
+        <section class="mySlider">
+            <div class="images">
+                @foreach (Slider slider in Model.Sliders)
+                {
+                    <div class="item">
+                        <img src="~/img/@slider.Image">
+                    </div>
+                }
+            </div>
+            <div class="content">
+                @Html.Raw(Model.Content.Title)
+                <p class="text-muted" style="width:400px; font-size: 20px; line-height:1.5 ; ">
+                    @Html.Raw(Model.Content.Description)
+                </p>
+                <img src="~/img/@Model.Content.Image">
+            </div>
+            <div class="icons left">
+                <i class="fas fa-long-arrow-alt-left"></i>
+            </div>
+            <div class="icons right">
+                <i class="fas fa-long-arrow-alt-right"></i>
+            </div>
+
+        </section>
+        <!-- Slider -->
+        <!-- Flowers -->
+        <section class="flowersList my-5">
+            <div class="container">
+                <div class="lists">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-8">
+                            <div class="responsive-lists">
+                                Categories
+                                <i class="fas fa-caret-down px-2"></i>
+                            </div>
+                            <div class="row FlowerList mt-5">
+                                @foreach (Category category in Model.Categories)
+                                {
+                                    <div data-id="@category.Name">@category.Name</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="images">
+                    <div class="row">
+                        <partial name="_LoadMore" />
+                    </div>
+                </div>
+                <h6 class="LoadMore">Load More >></h6>
+            </div>
+        </section>
+        <!-- Flowers -->
+        <!-- Video -->
+        <section class="video d-flex mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="image">
+                            <img src="~/img/video_image.jpg" alt="">
+                            <div class="play">
+                                <a href="https://www.youtube.com/watch?time_continue=1&v=K-0cjGCNYfs&_ga=2.155478651.1786364119.1577451284-1341483944.1577202749"
+                                   target="_self"><i class="fas fa-play"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="content">
+                            <h2>
+                                @Html.Raw(Model.Video.title)
+                            </h2>
+                            <p class="text-muted">
+                                @Model.Video.Description
+                            </p>
+                            <ul>
+                                @foreach (VideoList list in Model.Lists)
+                                {
+                                    <li>@list.List</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Video -->
+        <!-- Experts -->
+        <section class="experts mt-5">
+            <div class="about text-center">
+                <div class="title">
+                    <h3>Flower Experts</h3>
+                </div>
+                <div class="text">
+                    <p>
+                        A perfect blend of creativity, energy, communication, happiness and love. Let us arrange a
+                        smilefor you.
+                    </p>
+                </div>
+            </div>
+            <div class="expertImages mt-5">
+                <div class="container">
+                    <div class="row">
+                        @foreach (Expert expert in Model.Experts)
+                        {
+                            <div class="col-lg-3 col-md-6 text-center">
+                                <div class="image">
+                                    <div class="image">
+                                        <img src="~/img/@expert.Image" alt="">
+                                    </div>
+                                    <div class="abouts mt-3">
+                                        <p>@expert.Name</p>
+                                        <span style="color: #6a6a6a;">@expert.Profession.Name</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Experts -->
+        <!-- Subscribe -->
+        <section class="subscribe mt-5">
+            <div class="title">
+                <h3>Join The Colorful Bunch!</h3>
+            </div>
+            <div class="form">
+                <input type="email" placeholder="Email Address">
+                <button>SUBSCRIBE</button>
+            </div>
+        </section>
+        <!-- Subscribe -->
+        <section class="slider2 mt-5 pb-5">
+            <div class="container">
+                <div class="images owl-carousel">
+                    @foreach (Imotional imotional in Model.Imotionals)
+                    {
+                        <div class="items">
+                            <img src="~/img/@imotional.Image" alt="">
+                            <div class="about">
+                                <h4>
+                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus lingua.
+                                </h4>
+                                <p>@imotional.Name</p>
+                                <span class="text-muted">@imotional.Profession.Name</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="owl-controls">
+                    <div class="owl-nav">
+                        <button class="prev" role="presentation" type="button">
+                            <span aria-label="Previous"> <i class="fas fa-chevron-left"></i></span>
+                        </button>
+                        <button class="next" role="presentation" type="button">
+                            <span aria-label="Next"> <i class="fas fa-chevron-right"></i></span>
+                        </button>
+                    </div>
+                    <div class="owl-dots">
+                        <div class="owl-dot active"><span></span></div>
+                        <div class="owl-dot"><span></span></div>
+                        <div class="owl-dot"><span></span></div>
+                    </div>
+                </div>
+                <div class="icons left">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="icons right">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </section>
+        <!-- Slider2 -->
+        <!-- owlCarousel -->
+        @await Component.InvokeAsync("Carousels")
+        <!-- owlCarousel -->
+
+        <div class="backTop">
+            <i class="fas fa-caret-up"></i>
+        </div>
+    </main>

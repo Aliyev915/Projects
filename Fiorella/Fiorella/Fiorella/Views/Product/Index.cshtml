@@ -1,0 +1,151 @@
+﻿@model HomeVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<input type="hidden" id="count" value="@ViewBag.ProductCount" />
+
+<section class="headerArea py-5">
+    <div class="container">
+        <div class="title">
+            <h1>Product List</h1>
+        </div>
+        <div class="text">
+            <p>Where flowers are our inspiration</p>
+        </div>
+    </div>
+</section>
+
+<section class="flowersList my-5">
+    <div class="container">
+        <div class="lists">
+            <div class="row d-flex justify-content-between">
+                <div class="col-8">
+                    <div class="responsive-lists">
+                        Categories
+                        <i class="fas fa-caret-down px-2"></i>
+                    </div>
+                    <div class="row FlowerList mt-5">
+                        @foreach (Category category in Model.Categories)
+                        {
+                            <div data-id="@category.Name">@category.Name</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="images">
+            <div class="row">
+                <partial name="_LoadMore" />
+            </div>
+        </div>
+        <h6 class="LoadMore">Load More >></h6>
+    </div>
+</section>
+@await Component.InvokeAsync("Carousels")
+
+<section class="tab-menu">
+    <div class="container">
+        <div class="tab-header ">
+            <ul>
+                <li id="description" class="selected">DESCRIPTION</li>
+                <li id="info">ADDITIONAL INFORMATION</li>
+                <li id="review">REVIEWS</li>
+            </ul>
+        </div>
+        <div class="tab-content mt-5">
+            <div id="descript">
+                <h2>The power of flowers</h2>
+                <p>
+                    Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla
+                    ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel
+                    augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas
+                    tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem
+                    neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
+                    Maecenas nec odio et ante
+                </p>
+            </div>
+            <div id="information">
+                <span class="font-weight-bold">Weight</span>
+                <span class="text-muted">:1kg</span><br>
+                <span class="font-weight-bold">Dimensions</span>
+                <span class="text-muted">:30x30x50cm</span>
+            </div>
+            <div id="reviews">
+                <h3>Reviews</h3>
+                <div class="row mt-5">
+                    <div class="col-lg-2">
+                        <div class="image">
+                            <img src="../img/Shirley Harris.png" style="width: 50%;">
+                        </div>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="info">
+                            <div class="name">
+                                <span>Joshua Garcia</span>
+                                <span style="color:#6a6a6a; font-size: 12px;">27.04.2018</span>
+                            </div>
+                            <div class="message">
+                                <p class="text-muted">
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                    Aenean commodo
+                                    ligula eget dolor. Aenean massa. Cum sociis Theme natoque penatibus et
+                                    magnis dis parturient montes, nascetur ridiculus mus.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-lg-2">
+                        <div class="image">
+                            <img src="../img/Beverly Clark.png" style="width: 50%;">
+                        </div>
+                    </div>
+                    <form>
+                        <div class="col-lg-10">
+                            <div class="name">
+                                <span>Joan Stanley</span>
+                                <span style="color:#6a6a6a; font-size: 12px;">27.04.2018</span>
+                            </div>
+                            <div class="message">
+                                <p class="text-muted">
+                                    Etiam rhoncus. Maecenas tempus, tellus eget
+                                    condimentum
+                                    rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed
+                                    ipsum.
+                                    Nam quam nunc, blandit vel, luctus pulvinar, hendrerit
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="Form mt-5">
+                    <h3>Add a review</h3>
+                    <p class="text-muted">
+                        Your email address will not be published. Required fields are marked *
+                    </p>
+                    <form action="" method="POST">
+                        <label class="text-muted">Your review *</label>
+                        <textarea name="comment" cols="45" rows="8" aria-required="true" required></textarea>
+                        <label for="name" class="text-muted">Name*</label>
+                        <input type="text" aria-required="true" required id="name">
+                        <label for="email" class="text-muted">Email*</label>
+                        <input type="email" name="email" aria-required="true" required id="email">
+                        <div class="cookies">
+                            <input type="checkbox" id="checkbox" name="cookies" value="yes">
+                            <label for="check" class="text-muted">
+                                Save my name, email, and website in this
+                                browser
+                                for
+                                the next time I comment.
+                            </label>
+                        </div>
+                        <a href=""><input type="submit" value="SUBMIT" id="submit"></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

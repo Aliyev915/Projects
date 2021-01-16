@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Carousel>
+@{
+    Layout = null;
+}
+
+    <section class="owlCarousel my-5 ">
+        <div class="slideArea owl-carousel">
+            @foreach (Carousel carousel in Model)
+            {
+                <div class="images">
+                    <a href="https://www.instagram.com/p/BiCEkWiHtWb/?_ga=2.59880621.1279402450.1577878967-1341483944.1577202749">
+                        <div class="item">
+                            <i class="fab fa-instagram"></i>
+                            <img src="~/img/@carousel.Image">
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+        <div id="features">#FIORELLO</div>
+    </section>

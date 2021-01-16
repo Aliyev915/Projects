@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20210109102446_Init.cs" />
+    <Compile Remove="Migrations\20210109102446_Init.Designer.cs" />
+    <Compile Remove="Migrations\20210114131528_AddUserTable.cs" />
+    <Compile Remove="Migrations\20210114131528_AddUserTable.Designer.cs" />
+    <Compile Remove="Migrations\20210114132413_AddUserTable.cs" />
+    <Compile Remove="Migrations\20210114132413_AddUserTable.Designer.cs" />
+    <Compile Remove="Migrations\20210115164937_AddFile.cs" />
+    <Compile Remove="Migrations\20210115164937_AddFile.Designer.cs" />
+    <Compile Remove="Migrations\20210116162107_AddShopTable.cs" />
+    <Compile Remove="Migrations\20210116162107_AddShopTable.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Admin\" />
+  </ItemGroup>
+
+</Project>

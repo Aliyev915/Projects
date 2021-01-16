@@ -1,0 +1,72 @@
+﻿@model ProductVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Product product = ViewBag.Product;
+}
+
+<div class="main-wrapper mdc-drawer-app-content">
+    <!-- partial:../../partials/_navbar.html -->
+    <div class="page-wrapper mdc-toolbar-fixed-adjust">
+        <main class="content-wrapper">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell--span-12">
+                        <div class="mdc-card">
+                            <h6 class="card-title">Edit Flower</h6>
+                            <div class="template-demo">
+                                <form method="post" enctype="multipart/form-data">
+                                    <img height="300" width="300" src="~/img/@product.Image" alt="Alternate Text" />
+                                    <div class="mdc-layout-grid__inner">
+                                        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                            <div class="mdc-text-field">
+                                                <input asp-for="Name" value="@product.Name" class="mdc-text-field__input" id="text-field-hero-input">
+                                                <div class="mdc-line-ripple"></div>
+                                                <label for="text-field-hero-input" class="mdc-floating-label">Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                            <div class="mdc-text-field">
+                                                <input value="@product.Category.Name" disabled class="mdc-text-field__input" id="text-field-hero-input">
+                                                <div class="mdc-line-ripple"></div>
+                                                <label for="text-field-hero-input" class="mdc-floating-label">Category</label>
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                            <div class="mdc-text-field">
+                                                <select asp-for="Category" class="mdc-text-field__input" id="text-field-hero-input">
+                                                    @foreach (Category category in ViewBag.Categories)
+                                                    {
+                                                        <option>@category.Name</option>
+                                                    }
+                                                </select>
+                                                <div class="mdc-line-ripple"></div>
+                                                <label for="text-field-hero-input" class="mdc-floating-label">Category</label>
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                            <div class="mdc-text-field">
+                                                <input asp-for="Photo" class="mdc-text-field__input" type="file" id="text-field-hero-input">
+                                                <div class="mdc-line-ripple"></div>
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                            <div class="mdc-text-field">
+                                                <input asp-for="Price" value="@product.Price" min="50" step="0.01" class="mdc-text-field__input" id="text-field-hero-input">
+                                                <div class="mdc-line-ripple"></div>
+                                                <label for="text-field-hero-input" class="mdc-floating-label">Price</label>
+                                            </div>
+                                        </div>
+                                        <button class="mdc-button filled-button--info">
+                                            Edit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

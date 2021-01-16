@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <div class="page-wrapper mdc-toolbar-fixed-adjust">
+        <main class="content-wrapper">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+                        <div class="mdc-card p-0">
+                            <h3 class="card-title card-padding pb-5 text-center">Flowers</h3>
+                            <a asp-area="Admin" asp-controller="Category" asp-action="Create" class="mdc-button mdc-button--raised icon-button filled-button--info" style="width:5%;margin-left:93%">
+                                <i class="material-icons mdc-button__icon">add</i>
+                            </a>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Image</th>
+                                            <th>Settings</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 1; i <= Model.Count(); i++)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    Category @i
+                                                </td>
+                                                <td>
+                                                    @Model.ElementAt(i-1).Name
+                                                </td>
+                                                <td>
+                                                    <a asp-action="Edit" asp-route-Id="@Model.ElementAt(i-1).Id" class="mdc-button icon-button filled-button--success">
+                                                        <i class="material-icons mdc-button__icon">colorize</i>
+                                                    </a>
+                                                    <a asp-action="Delete" asp-route-Id="@Model.ElementAt(i-1).Id" class="mdc-button icon-button filled-button--secondary">
+                                                        <i class="material-icons mdc-button__icon">delete</i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- partial:../../partials/_footer.html -->
+        <!-- partial -->
+    </div>

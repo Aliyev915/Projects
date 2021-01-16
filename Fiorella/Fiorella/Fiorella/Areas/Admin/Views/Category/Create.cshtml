@@ -1,0 +1,37 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <div class="main-wrapper mdc-drawer-app-content">
+        <!-- partial:../../partials/_navbar.html -->
+        <div class="page-wrapper mdc-toolbar-fixed-adjust">
+            <main class="content-wrapper">
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell--span-6">
+                            <div class="mdc-card">
+                                <h6 class="card-title">Add Category</h6>
+                                <div class="template-demo">
+                                    <form method="post" enctype="multipart/form-data">
+                                        <div class="mdc-layout-grid__inner">
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12-desktop">
+                                                <div class="mdc-text-field">
+                                                    <input asp-for="Name" class="mdc-text-field__input" id="text-field-hero-input">
+                                                    <div class="mdc-line-ripple"></div>
+                                                </div>
+                                            </div>
+                                            <button class="mdc-button filled-button--success">
+                                                Add
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>

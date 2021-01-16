@@ -1,0 +1,142 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!-- navbar -->
+<header>
+    <nav>
+        <div class="container-fluid">
+            <div class="row justify-content-between">
+                <div class="col-3">
+                    <div class="logo">
+                        <img src="~/img/Fiorella.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <ul class="navLinks">
+                        <li class="Home active">
+                            <a asp-controller="Home">Home</a>
+                        </li>
+                        <li class="Page">
+                            <a asp-controller="Product">Products</a>
+                        </li>
+                        <li class="Shop">
+                            <a asp-controller="Shop">Shop</a>
+                        </li>
+                        <li class="Blog">
+                            <a asp-controller="Accordion">Accordions</a>
+                        </li>
+                        <li class="Element">
+                            <a asp-controller="Tab">Tabs</a>
+                        </li>
+                        <li class="Portfolio">
+                            <a asp-controller="Bar">Progress Bars</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@User.Identity.Name</li>
+                            <li class="Portfolio">
+                                <a asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="Portfolio">
+                                <a asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-3 d-flex search-menu">
+                    <div class="search">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <div class="search2">
+                                <input type="text" placeholder="Search">
+                                <i class="fas fa-search"></i>
+                                <ul style="background-color:white">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="basket">
+                        <i class="fas fa-shopping-bag"> <sup>@ViewBag.Count</sup></i>
+                        <span>CART ($0)</span>
+                        <div class="products">
+                            @if (ViewBag.Count == 0)
+                            {
+                                <p> No products in the card</p>
+                            }
+                            else
+                            {
+                                <table>
+                                    @foreach (BasketVM product in ViewBag.Products)
+                                    {
+                                        <tbody>
+                                            <tr class="total">
+                                                <td>
+                                                    <img src="~/img/@product.Image" alt="Alternate Text" />
+                                                </td>
+                                                <td>
+                                                    <h6>@product.Name</h6>
+                                                    <p>@product.Count X @product.Price$</p>
+                                                </td>
+                                                <td>
+                                                    <a asp-controller="Home" asp-action="RemoveFromBasket" asp-route-Id="@product.Id">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    }
+
+                                    <tfoot>
+                                        <tr class="total">
+                                            <td>TOTAL</td>
+                                            <td>@ViewBag.Total$</td>
+                                        </tr>
+                                        <tr class="productButton">
+                                            <td class="view">VIEW CARDS</td>
+                                            <td class="checkout">CHECKOUT</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="navbarResponsive">
+        <div class="lists">
+            <div class="home">
+                <p><a href="#">Home</a></p>
+            </div>
+            <div class="page">
+                <p><a href="#">Page</a></p>
+            </div>
+            <div class="shop">
+                <p><a href="#">Shop</a> </p>
+            </div>
+            <div class="portfolio">
+                <p><a href="#">Accordions</a></p>
+            </div>
+            <div class="blog">
+                <p><a href="#">Tabs</a></p>
+            </div>
+            <div class="element">
+                <p><a href="#">Progress Bars</a></p>
+            </div>
+        </div>
+        <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+
+</header>
+<!-- navbar -->
